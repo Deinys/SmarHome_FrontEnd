@@ -1,0 +1,70 @@
+.principal{
+    background-color: #506f81;
+}
+
+.interior-light{
+    background-color: #949fa7;
+    -webkit-box-shadow: 4px 4px 5px rgb(0, 0, 0);
+  -moz-box-shadow: 4px 4px 5px rgb(0, 0, 0);
+  filter: shadow(color=#000000, direction=135, strength=2);
+
+}
+
+
+.exterior-light{
+    background-color: #183153;
+
+    -webkit-box-shadow: 4px 4px 5px rgb(0, 0, 0);
+  -moz-box-shadow: 4px 4px 5px rgb(0, 0, 0);
+  filter: shadow(color=#000000, direction=135, strength=2);
+}
+.color-water{
+    background-color: #183153;
+    -webkit-box-shadow: 4px 4px 5px rgb(0, 0, 0);
+  -moz-box-shadow: 4px 4px 5px rgb(0, 0, 0);
+  filter: shadow(color=#000000, direction=135, strength=2);
+}
+.color-temp{
+    background-color: #949fa7;
+    -webkit-box-shadow: 4px 4px 5px rgb(0, 0, 0);
+  -moz-box-shadow: 4px 4px 5px rgb(0, 0, 0);
+  filter: shadow(color=#000000, direction=135, strength=2);
+}
+.interior-alarm{
+    background-color: #949fa7;
+    -webkit-box-shadow: 4px 4px 5px rgb(0, 0, 0);
+  -moz-box-shadow: 4px 4px 5px rgb(0, 0, 0);
+  filter: shadow(color=#000000, direction=135, strength=2);
+}
+
+.exterior-alarm{    
+      background-color: #183153;
+    -webkit-box-shadow: 4px 4px 5px rgb(0, 0, 0);
+  -moz-box-shadow: 4px 4px 5px rgb(0, 0, 0);
+  filter: shadow(color=#000000, direction=135, strength=2);
+
+}
+
+.color-navbar{
+    background-color: #506f81;
+}
+.navbar1{
+   background-color: #eeeeee3b;
+
+}
+.nav-link{
+    background-color: #00000033;
+}
+.dropdown-item{
+    background-color: #ffffff;
+    padding: 5px;
+}
+.container-login{
+    background-color: #506f81;
+    margin: 10;
+}
+.button{
+  background-color: #506f81;
+  border: 0px;
+
+}
