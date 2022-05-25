@@ -3,59 +3,116 @@ import AlarmB from "/src/img/alarm-blanca.png";
 import AlarmA from "/src/img/alarm-azul.png";
 import Temperature from "../../img/term-azul.png";
 import Water from "../../img/water-azul.png";
-import BombilloAzul from "../../img/bombillo-azul.png";
-import BombilloBlanco from "../../img/bombillo-blanco.png";
-import Logo from "../../img/Logo2.png";
-
-
+import BombilloAzul from "../../img/bombillo-azul.png"
+import BombilloBlanco from "../../img/bombillo-blanco.png"
+import TempB from "../../img/term-blanco.png";
 const Contenido = () => {
     return (
-        <div className="principal p-5">
-            <div className="container justify-content-center">
-                <p className="text-white fs-1">Lights</p>
-                <div className="container ">
-                    <div className="row justify-content-center">
-                        <div className=" interior-light col-4 m-4  rounded-3">
-                            <p className="text-white fs-4">Interior</p>
-                            <img src={BombilloAzul} alt="" height="80" width="80" />
+        <div className="container-cuerpo">
+            <div className="contenedor-arriba m-2">
+                <div className="row m-4 p-4">
+                    {/* First light control card */}
+                    <div className="quinta-col col bg-primary m-4 p-4 rounded-3">
+                        <div className="row">
+                            <div className="col">
+                                <div className="div"><img src={BombilloBlanco} alt="" height="50" width="50" /></div>
+                                <div className="div"><p className="text-white">Light</p></div>
+                                <div className="div"><p className="text-white">Interior Light</p></div>
+                                <div className="div">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input border border-white border border-white" type="checkbox" id="flexSwitchCheckDefault" />
+                                        <label class="form-check-label" for="flexSwitchCheckDefault"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col"></div>
                         </div>
-                        <div className=" exterior-light col-4 m-4  rounded-3 " >
-                            <p className="text-white fs-4">Exterior</p>
-                            <img src={BombilloBlanco} alt="" height="80" width="80" />
+                    </div>
+                    {/* SEGUNDO CUADRO */}
+                    <div className="quinta-col col bg-primary m-4 p-4 rounded-3">
+                        <div className="row">
+                            <div className="col">
+                                <div className="div"><img src={BombilloBlanco} alt="" height="50" width="50" /></div>
+                                <div className="div"><p className="text-white">Light</p></div>
+                                <div className="div"><p className="text-white">Exterior Light</p></div>
+                                <div className="div">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input border border-white border border-white" type="checkbox" id="flexSwitchCheckDefault" />
+                                        <label class="form-check-label" for="flexSwitchCheckDefault"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col"></div>
+                        </div>
+                    </div>
+                    {/* TERCER CUADRO */}
+                    <div className="quinta-col col bg-primary m-4 p-4 rounded-3">
+                        <div className="row">
+                            <div className="col">
+                                <div className="div"><img src={Water} alt="" height="50" width="50" /></div>
+                                <div className="div"><p className="text-white">Water Level</p></div>
+                                <div className="div"><p className="text-white">Water Tank</p></div>
+                                <div className="div">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input border border-white border border-white" type="checkbox" id="flexSwitchCheckDefault" />
+                                        <label class="form-check-label" for="flexSwitchCheckDefault"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col"></div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className="container">
-                <p className="text-white fs-1">Sensors</p>
-                <div className="container ">
-                    <div className="row justify-content-center">
-                        <div className="color-water col-4 m-4 rounded-3">
-                            <p className="text-white fs-4">Tank level</p>
-                            <img src={Water} alt="" height="80" width="80" />
-                        </div>
-                        <div className="color-temp col-4 m-4 rounded-3" >
-                            <p className="text-white fs-4">Temperature</p>
-                            <img src={Temperature} alt="" height="80" width="80" />
+                <div className="row m-4 p-4">
+                    {/* CUERTO CUADRO */}
+                    <div className="quinta-col col bg-primary m-4 p-4 rounded-3">
+                        <div className="row">
+                            <div className="col">
+                                <div className="div"><img src={TempB} alt="" height="50" width="50" /></div>
+                                <div className="div"><p className="text-white">Temperature</p></div>
+                                <div className="div"><p className="text-white">Temperature</p></div>
+                                <div className="div">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input border border-white border border-white" type="checkbox" id="flexSwitchCheckDefault" />
+                                        <label class="form-check-label" for="flexSwitchCheckDefault"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col"></div>
                         </div>
                     </div>
+                    {/* QUINTO CUADRO */}
+                    <div className="quinta-col col bg-primary m-4 p-4 rounded-3">
+                        <div className="row">
+                            <div className="col">
+                                <div className="div"><img src={AlarmB} alt="" height="50" width="50" /></div>
+                                <div className="div"><p className="text-white">Motion</p></div>
+                                <div className="div"><p className="text-white">Motion Sensor</p></div>
+                                <div className="div">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input border border-white border border-white" type="checkbox" id="flexSwitchCheckDefault" />
+                                        <label class="form-check-label" for="flexSwitchCheckDefault"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col"></div>
+                        </div>
+                    </div>
+                    {/* FINAL CUADRO */}
+                    {/* <div className="sexta-col col bg-primary m-4 p-4 rounded-3">
+                        <div className="div"><img src={BombilloBlanco} alt="" height="50" width="50" /></div>
+                        <div className="div"><p className="text-white">Motion</p></div>
+                        <div className="div"><p className="text-white">devices</p></div>
+                        <div className="div">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input border border-white border border-white" type="checkbox" id="flexSwitchCheckDefault" />
+                                <label class="form-check-label" for="flexSwitchCheckDefault"></label>
+                            </div>
+                        </div>
+                    </div> */}
                 </div>
             </div>
-
-            <div className="container">
-                <p className="text-white fs-1">Motion Alarm</p>
-                    <div className="row justify-content-center">
-                        <div className="interior-alarm col-4 m-4 rounded-3">
-                            <p className="text-white fs-4">Interior Motion Alarm</p>
-                            <img src={AlarmA} alt="" height="80" width="80" />
-                        </div>
-                        <div className="exterior-alarm col-4 m-4 rounded-3" >
-                            <p className="text-white fs-4">Exterior Motion Alarm</p>
-                            <img src={AlarmB} alt="" height="80" width="80" />
-                        </div>
-                    </div>
-            </div>
-        </div >
+        </div>
     );
 };
 
