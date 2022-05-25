@@ -1,5 +1,6 @@
 .principal{
-    background-color: #506f81;
+    background-color: #dee6eb;
+
 }
 
 .interior-light{
@@ -7,7 +8,9 @@
     -webkit-box-shadow: 4px 4px 5px rgb(0, 0, 0);
   -moz-box-shadow: 4px 4px 5px rgb(0, 0, 0);
   filter: shadow(color=#000000, direction=135, strength=2);
-
+  background-image: url(../../src/img/houseInterior.PNG);
+  background-size:cover;
+  background-position: center;
 }
 
 
@@ -17,6 +20,9 @@
     -webkit-box-shadow: 4px 4px 5px rgb(0, 0, 0);
   -moz-box-shadow: 4px 4px 5px rgb(0, 0, 0);
   filter: shadow(color=#000000, direction=135, strength=2);
+  background-image: url(../../src/img/houseExterior.PNG);
+  background-size: cover;
+  background-position: center;
 }
 .color-water{
     background-color: #183153;
@@ -29,6 +35,11 @@
     -webkit-box-shadow: 4px 4px 5px rgb(0, 0, 0);
   -moz-box-shadow: 4px 4px 5px rgb(0, 0, 0);
   filter: shadow(color=#000000, direction=135, strength=2);
+  background-image: url(../../src/img/Tempgauge.PNG);
+  background-size: cover;
+  background-position: center;
+  /* background-repeat: no-repeat; */
+
 }
 .interior-alarm{
     background-color: #949fa7;
@@ -47,6 +58,7 @@
 
 .color-navbar{
     background-color: #506f81;
+    height: 90px;
 }
 .navbar1{
    background-color: #eeeeee3b;
@@ -68,3 +80,4 @@
   border: 0px;
 
 }
+

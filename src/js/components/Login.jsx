@@ -3,8 +3,6 @@ import React from "react";
 const Login = () => {
     return (
         <div>
-            <h1>SmartHome</h1>
-
             <div className="container">
                 <div class="container d-flex justify-content-center">
                     <div class="col-md-6" >

@@ -3,7 +3,6 @@ import React from "react";
 const Register = () => {
     return (
         <div>
-            <h1>SmartHome</h1>
             <div class="container d-flex justify-content-center">
                 <div class="col-md-6" >
                     <div class="shadow-lg p-3 mb-5 mt-4 bg-body rounded">

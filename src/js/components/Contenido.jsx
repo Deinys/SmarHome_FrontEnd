@@ -3,14 +3,15 @@ import AlarmB from "/src/img/alarm-blanca.png";
 import AlarmA from "/src/img/alarm-azul.png";
 import Temperature from "../../img/term-azul.png";
 import Water from "../../img/water-azul.png";
-import BombilloAzul from "../../img/bombillo-azul.png"
-import BombilloBlanco from "../../img/bombillo-blanco.png"
+import BombilloAzul from "../../img/bombillo-azul.png";
+import BombilloBlanco from "../../img/bombillo-blanco.png";
+import Logo from "../../img/Logo2.png";
 
 
 const Contenido = () => {
     return (
         <div className="principal p-5">
-            <div className="container">
+            <div className="container justify-content-center">
                 <p className="text-white fs-1">Lights</p>
                 <div className="container ">
                     <div className="row justify-content-center">
@@ -34,7 +35,7 @@ const Contenido = () => {
                             <img src={Water} alt="" height="80" width="80" />
                         </div>
                         <div className="color-temp col-4 m-4 rounded-3" >
-                            <p className="text-white fs-4">Temperatura</p>
+                            <p className="text-white fs-4">Temperature</p>
                             <img src={Temperature} alt="" height="80" width="80" />
                         </div>
                     </div>
