@@ -1,3 +1,9 @@
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap');
+
+
 .principal{
     background-color: #dee6eb;
 
@@ -27,7 +33,16 @@
 /* ::shadow:: */
 .primera-col, .segunda-col, .tercera-col, .cuarta-col, .quinta-col, .sexta-col{
   -webkit-box-shadow: 5px 5px 8px rgb(19, 23, 99);
+  -webkit-box-shadow: 5px 5px 8px rgb(19, 23, 99);
   -moz-box-shadow: 5px 5px 8px rgb(19, 23, 99);
   filter: shadow(color=#131763, direction=135, strength=2);
+}
+
+.collection-card {
+  background-color: #FFF;
+  border-radius: 10px;
+  box-shadow: 1px -1px 25px -2px rgba(0,0,0,0.25);
+  -webkit-box-shadow: 1px -1px 25px -2px rgba(0,0,0,0.25);
+  -moz-box-shadow: 1px -1px 25px -2px rgba(0,0,0,0.25);
 }
 

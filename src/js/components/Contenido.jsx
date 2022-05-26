@@ -19,9 +19,9 @@ const Contenido = () => {
                                 <div className="div"><p className="text-white">Light</p></div>
                                 <div className="div"><p className="text-white">Interior Light</p></div>
                                 <div className="div">
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input border border-white border border-white" type="checkbox" id="flexSwitchCheckDefault" />
-                                        <label class="form-check-label" for="flexSwitchCheckDefault"></label>
+                                    <div className="form-check form-switch">
+                                        <input className="form-check-input border border-white border border-white" type="checkbox" id="flexSwitchCheckDefault" />
+                                        <label className="form-check-label" for="flexSwitchCheckDefault"></label>
                                     </div>
                                 </div>
                             </div>
@@ -36,9 +36,9 @@ const Contenido = () => {
                                 <div className="div"><p className="text-white">Light</p></div>
                                 <div className="div"><p className="text-white">Exterior Light</p></div>
                                 <div className="div">
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input border border-white border border-white" type="checkbox" id="flexSwitchCheckDefault" />
-                                        <label class="form-check-label" for="flexSwitchCheckDefault"></label>
+                                    <div className="form-check form-switch">
+                                        <input className="form-check-input border border-white border border-white" type="checkbox" id="flexSwitchCheckDefault" />
+                                        <label className="form-check-label" for="flexSwitchCheckDefault"></label>
                                     </div>
                                 </div>
                             </div>
@@ -53,9 +53,9 @@ const Contenido = () => {
                                 <div className="div"><p className="text-white">Water Level</p></div>
                                 <div className="div"><p className="text-white">Water Tank</p></div>
                                 <div className="div">
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input border border-white border border-white" type="checkbox" id="flexSwitchCheckDefault" />
-                                        <label class="form-check-label" for="flexSwitchCheckDefault"></label>
+                                    <div className="form-check form-switch">
+                                        <input className="form-check-input border border-white border border-white" type="checkbox" id="flexSwitchCheckDefault" />
+                                        <label className="form-check-label" for="flexSwitchCheckDefault"></label>
                                     </div>
                                 </div>
                             </div>
@@ -72,9 +72,9 @@ const Contenido = () => {
                                 <div className="div"><p className="text-white">Temperature</p></div>
                                 <div className="div"><p className="text-white">Temperature</p></div>
                                 <div className="div">
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input border border-white border border-white" type="checkbox" id="flexSwitchCheckDefault" />
-                                        <label class="form-check-label" for="flexSwitchCheckDefault"></label>
+                                    <div className="form-check form-switch">
+                                        <input className="form-check-input border border-white border border-white" type="checkbox" id="flexSwitchCheckDefault" />
+                                        <label className="form-check-label" for="flexSwitchCheckDefault"></label>
                                     </div>
                                 </div>
                             </div>
@@ -89,9 +89,9 @@ const Contenido = () => {
                                 <div className="div"><p className="text-white">Motion</p></div>
                                 <div className="div"><p className="text-white">Motion Sensor</p></div>
                                 <div className="div">
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input border border-white border border-white" type="checkbox" id="flexSwitchCheckDefault" />
-                                        <label class="form-check-label" for="flexSwitchCheckDefault"></label>
+                                    <div className="form-check form-switch">
+                                        <input className="form-check-input border border-white border border-white" type="checkbox" id="flexSwitchCheckDefault" />
+                                        <label className="form-check-label" for="flexSwitchCheckDefault"></label>
                                     </div>
                                 </div>
                             </div>

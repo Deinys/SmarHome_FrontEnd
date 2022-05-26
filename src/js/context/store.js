@@ -1,48 +1,190 @@
-import React, { useState, useEffect } from "react";
-import getState from "./flux.js";
+const getState = ({ getStore, getActions, setStore }) => {
+  return {
+    store: {
+      chartUnit: "",
+      chartDates: [],
+      chartData: [],
+      currentTab: "light",
+      collection: [
+        {
+          id: 1,
+          device: "light",
+          name: "Interior Light",
+          status: false,
+          data: [
+            {
+              date_created: "Sat, 21 May 2022 01:57:38 GMT",
+              device_data: "17",
+              entry_id: 4,
+            },
+            {
+              date_created: "Sat, 21 May 2022 02:57:38 GMT",
+              device_data: "18",
+              entry_id: 4,
+            },
+            {
+              date_created: "Sat, 21 May 2022 03:57:38 GMT",
+              device_data: "19",
+              entry_id: 4,
+            },
+            {
+              date_created: "Sat, 21 May 2022 04:57:38 GMT",
+              device_data: "17",
+              entry_id: 4,
+            },
+            {
+              date_created: "Sat, 21 May 2022 05:57:38 GMT",
+              device_data: "19",
+              entry_id: 4,
+            },
+            {
+              date_created: "Sat, 21 May 2022 06:57:38 GMT",
+              device_data: "20",
+              entry_id: 4,
+            },
+            {
+              date_created: "Sat, 21 May 2022 07:57:38 GMT",
+              device_data: "24",
+              entry_id: 4,
+            },
+            {
+              date_created: "Sat, 21 May 2022 08:57:38 GMT",
+              device_data: "22",
+              entry_id: 4,
+            },
+            {
+              date_created: "Sat, 21 May 2022 09:57:38 GMT",
+              device_data: "23",
+              entry_id: 4,
+            },
+            {
+              date_created: "Sat, 21 May 2022 10:57:38 GMT",
+              device_data: "25",
+              entry_id: 4,
+            },
+            {
+              date_created: "Sat, 21 May 2022 11:57:38 GMT",
+              device_data: "22",
+              entry_id: 5,
+            },
+            {
+              date_created: "Sat, 21 May 2022 12:57:38 GMT",
+              device_data: "26",
+              entry_id: 5,
+            },
+            {
+              date_created: "Sat, 21 May 2022 13:57:38 GMT",
+              device_data: "24",
+              entry_id: 5,
+            },
+            {
+              date_created: "Sat, 21 May 2022 14:57:38 GMT",
+              device_data: "23",
+              entry_id: 5,
+            },
+            {
+              date_created: "Sat, 21 May 2022 15:57:38 GMT",
+              device_data: "26",
+              entry_id: 5,
+            },
+            {
+              date_created: "Sat, 21 May 2022 16:57:38 GMT",
+              device_data: "23",
+              entry_id: 5,
+            },
+            {
+              date_created: "Sat, 21 May 2022 17:57:38 GMT",
+              device_data: "22",
+              entry_id: 5,
+            },
+            {
+              date_created: "Sat, 21 May 2022 18:57:38 GMT",
+              device_data: "21",
+              entry_id: 5,
+            },
+            {
+              date_created: "Sat, 21 May 2022 19:57:38 GMT",
+              device_data: "20",
+              entry_id: 5,
+            },
+            {
+              date_created: "Sat, 21 May 2022 20:57:38 GMT",
+              device_data: "21",
+              entry_id: 5,
+            },
+          ],
+        },
+        {
+          id: 2,
+          device: "light",
+          name: "Exterior Light",
+          status: false,
+        },
+        {
+          id: 3,
+          device: "sonar",
+          name: "Water level",
+          status: false,
+        },
+        {
+          id: 4,
+          device: "thermostat",
+          name: "Temperature",
+          status: false,
+        },
+        {
+          id: 5,
+          device: "motion",
+          name: "Motion",
+          status: false,
+        },
+      ],
+    },
+    actions: {
+      setSensorStatus: (id) => {
+        let store = getStore();
 
-// Don't change, here is where we initialize our context, by default it's just going to be null.
-export const Context = React.createContext(null);
+        let newCollection = store.collection.map((eachObj) => {
+          if (eachObj.id === id) {
+            return { ...eachObj, status: !eachObj.status };
+          }
+          return eachObj;
+        });
+        setStore({
+          ...store,
+          collection: newCollection,
+        });
+      },
+      setCurrentTab: (device) => {
+        let store = getStore();
 
-// This function injects the global store to any view/component where you want to use it, we will inject the context to layout.js, you can see it here:
-// https://github.com/4GeeksAcademy/react-hello-webapp/blob/master/src/js/layout.js#L35
-const injectContext = PassedComponent => {
-	const StoreWrapper = props => {
-		//this will be passed as the contenxt value
-		const [state, setState] = useState(
-			getState({
-				getStore: () => state.store,
-				getActions: () => state.actions,
-				setStore: updatedStore =>
-					setState({
-						store: Object.assign(state.store, updatedStore),
-						actions: { ...state.actions }
-					})
-			})
-		);
+        setStore({
+          ...store,
+          currentTab: device,
+        });
+      },
+      setDailyChart: (currentDayHours, currentDayData) => {
+        let store = getStore();
 
-		useEffect(() => {
-			/**
-			 * EDIT THIS!
-			 * This function is the equivalent to "window.onLoad", it only runs once on the entire application lifetime
-			 * you should do your ajax requests or fetch api requests here. Do not use setState() to save data in the
-			 * store, instead use actions, like this:
-			 *
-			 * state.actions.loadSomeData(); <---- calling this function from the flux.js actions
-			 *
-			 **/
-		}, []);
+        setStore({
+          ...store,
+          chartUnit: "hour",
+          chartDates: currentDayHours,
+          chartData: currentDayData,
+        });
+      },
+      setWeeklyChart: (pastWeekDates, pastWeekData) => {
+        let store = getStore();
 
-		// The initial value for the context is not null anymore, but the current state of this component,
-		// the context will now have a getStore, getActions and setStore functions available, because they were declared
-		// on the state of this component
-		return (
-			<Context.Provider value={state}>
-				<PassedComponent {...props} />
-			</Context.Provider>
-		);
-	};
-	return StoreWrapper;
+        setStore({
+          ...store,
+          chartUnit: "day",
+          chartDates: pastWeekDates,
+          chartData: pastWeekData,
+        });
+      },
+    },
+  };
 };
 
-export default injectContext;
+export default getState;
