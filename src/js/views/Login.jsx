@@ -1,7 +1,7 @@
 import React from "react";
 import Logo from "../../img/Logo2.png";
 
-const Register = () => {
+const Login = () => {
   return (
     <div>
       <div className="container">
@@ -14,20 +14,18 @@ const Register = () => {
                 </div>
                 <div class="col-12">
                   <label for="nombre" class="form-label"></label>
-                  <input class="form-control" placeholder="username" required />
+                  <input
+                    class="form-control"
+                    placeholder="username or email"
+                    required
+                  />
                 </div>
-                <div class="col-12">
-                  <label for="nombre" class="form-label"></label>
-                  <input class="form-control" placeholder="email" required />
-                </div>
-
                 <div class="col-12">
                   <label for="nombre" class="form-label"></label>
                   <input class="form-control" placeholder="password" required />
                 </div>
-
                 <div class="d-grid col-12 ">
-                  <button class="button btn btn-primary">Sing Up</button>
+                  <button class="button btn btn-primary">Log in</button>
                 </div>
               </form>
             </div>
@@ -38,7 +36,7 @@ const Register = () => {
             <div class="shadow-lg p-4">
               <form class="row g-4 needs-validation" novalidate>
                 <div class="d-grid col-12 ">
-                  {/* <p className="fw-bold">Do you already have an account created ?  <a href="#" class="stretched-link">Log in</a></p> */}
+                  {/* <p className="fw-bold">Don't have an account ?  <a href="#" class="stretched-link">Sing Up</a></p> */}
                 </div>
               </form>
             </div>
@@ -49,4 +47,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Login;
