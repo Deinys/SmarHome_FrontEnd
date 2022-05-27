@@ -1,142 +1,97 @@
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
-      chartUnit: "",
-      chartDates: [],
-      chartData: [],
-      currentTab: "light",
+      user: {
+        name: "Raul",
+        token: "",
+      },
+      charts: {
+        chartMin: 0,
+        chartMax: 100,
+        chartUnit: "",
+				genericWeeklyDates: [],
+				genericDailyDates: [],
+        chartDates: [],
+        chartData: [
+          21, 24, 23, 21, 24, 23, 21, 22, 23, 21, 24, 23, 23, 21, 24, 23, 23,
+          21, 22, 23, 21, 24, 23, 23,
+        ],
+        currentChartTab: "",
+      },
       collection: [
         {
-          id: 1,
-          device: "light",
-          name: "Interior Light",
-          status: false,
+          id: 0,
+          device: "intLight",
+          name: "Interior lights",
+          status: true,
           data: [
             {
-              date_created: "Sat, 21 May 2022 01:57:38 GMT",
-              device_data: "17",
-              entry_id: 4,
+              date: "Sat, 27 May 2022 18:47:38 GMT",
+              status: false,
             },
             {
-              date_created: "Sat, 21 May 2022 02:57:38 GMT",
-              device_data: "18",
-              entry_id: 4,
-            },
-            {
-              date_created: "Sat, 21 May 2022 03:57:38 GMT",
-              device_data: "19",
-              entry_id: 4,
-            },
-            {
-              date_created: "Sat, 21 May 2022 04:57:38 GMT",
-              device_data: "17",
-              entry_id: 4,
-            },
-            {
-              date_created: "Sat, 21 May 2022 05:57:38 GMT",
-              device_data: "19",
-              entry_id: 4,
-            },
-            {
-              date_created: "Sat, 21 May 2022 06:57:38 GMT",
-              device_data: "20",
-              entry_id: 4,
-            },
-            {
-              date_created: "Sat, 21 May 2022 07:57:38 GMT",
-              device_data: "24",
-              entry_id: 4,
-            },
-            {
-              date_created: "Sat, 21 May 2022 08:57:38 GMT",
-              device_data: "22",
-              entry_id: 4,
-            },
-            {
-              date_created: "Sat, 21 May 2022 09:57:38 GMT",
-              device_data: "23",
-              entry_id: 4,
-            },
-            {
-              date_created: "Sat, 21 May 2022 10:57:38 GMT",
-              device_data: "25",
-              entry_id: 4,
-            },
-            {
-              date_created: "Sat, 21 May 2022 11:57:38 GMT",
-              device_data: "22",
-              entry_id: 5,
-            },
-            {
-              date_created: "Sat, 21 May 2022 12:57:38 GMT",
-              device_data: "26",
-              entry_id: 5,
-            },
-            {
-              date_created: "Sat, 21 May 2022 13:57:38 GMT",
-              device_data: "24",
-              entry_id: 5,
-            },
-            {
-              date_created: "Sat, 21 May 2022 14:57:38 GMT",
-              device_data: "23",
-              entry_id: 5,
-            },
-            {
-              date_created: "Sat, 21 May 2022 15:57:38 GMT",
-              device_data: "26",
-              entry_id: 5,
-            },
-            {
-              date_created: "Sat, 21 May 2022 16:57:38 GMT",
-              device_data: "23",
-              entry_id: 5,
-            },
-            {
-              date_created: "Sat, 21 May 2022 17:57:38 GMT",
-              device_data: "22",
-              entry_id: 5,
-            },
-            {
-              date_created: "Sat, 21 May 2022 18:57:38 GMT",
-              device_data: "21",
-              entry_id: 5,
-            },
-            {
-              date_created: "Sat, 21 May 2022 19:57:38 GMT",
-              device_data: "20",
-              entry_id: 5,
-            },
-            {
-              date_created: "Sat, 21 May 2022 20:57:38 GMT",
-              device_data: "21",
-              entry_id: 5,
+              date: "Sat, 27 May 2022 18:47:38 GMT",
+              status: false,
             },
           ],
         },
         {
+          id: 1,
+          device: "sonar",
+          name: "Water level",
+          status: true,
+          data: {
+            weekly: [60, 54, 50, 88, 82, 75, 69].reverse(),
+            daily: [
+              62, 61, 60, 60, 60, 59, 57, 53, 53, 53, 52, 52, 50, 50, 49, 44,
+              44, 44, 44, 43, 42, 42, 42, 40,
+            ].reverse(),
+          },
+        },
+        {
           id: 2,
-          device: "light",
-          name: "Exterior Light",
-          status: false,
+          device: "thermostat",
+          name: "Temperature",
+          status: true,
+          data: {
+            weekly: [22, 24, 22, 21, 24, 23, 21],
+            daily: [
+              21, 24, 23, 21, 24, 23, 21, 22, 23, 21, 24, 23, 23, 21, 24, 23,
+              23, 21, 22, 23, 21, 24, 23, 23,
+            ],
+          },
         },
         {
           id: 3,
-          device: "sonar",
-          name: "Water level",
-          status: false,
+          device: "extLight",
+          name: "Exterior lights",
+          status: true,
+          data: [
+            {
+              date: "Sat, 27 May 2022 18:47:38 GMT",
+              status: false,
+            },
+            {
+              date: "Sat, 27 May 2022 18:47:38 GMT",
+              status: false,
+            },
+          ],
         },
         {
           id: 4,
-          device: "thermostat",
-          name: "Temperature",
-          status: false,
-        },
-        {
-          id: 5,
           device: "motion",
           name: "Motion",
-          status: false,
+          status: true,
+          data: [
+            {
+              date: "Sat, 27 May 2022 18:47:38 GMT",
+              status: false,
+            },
+            {
+              date: "Sat, 27 May 2022 18:47:38 GMT",
+              status: false,
+            },
+          ],
         },
       ],
     },
@@ -155,33 +110,118 @@ const getState = ({ getStore, getActions, setStore }) => {
           collection: newCollection,
         });
       },
-      setCurrentTab: (device) => {
+      setCurrentChartTab: (device) => {
         let store = getStore();
+        let actions = getActions();
+
+        if (device === "intLight") {
+          actions.setDailyChart(store.collection[1].data.daily);
+        }
+        if (device === "sonar") {
+          actions.setDailyChart(store.collection[1].data.daily);
+        }
+        if (device === "thermostat") {
+          actions.setDailyChart(store.collection[2].data.daily);
+        }
+        if (device === "extLight") {
+          actions.setDailyChart(store.collection[2].data.daily);
+        }
+        if (device === "motion") {
+          actions.setDailyChart(store.collection[1].data.daily);
+        }
 
         setStore({
           ...store,
-          currentTab: device,
+          charts: {
+            ...store.charts,
+            currentChartTab: device,
+          },
         });
       },
-      setDailyChart: (currentDayHours, currentDayData) => {
+      setDailyChart: (dailyData) => {
         let store = getStore();
+        let date = new Date();
+
+        let dateAtZeroMinInMili =
+          date.getTime() -
+          date.getMinutes() * 60 * 1000 -
+          date.getSeconds() * 1000;
+        let dateAtZeroMin = new Date(dateAtZeroMinInMili); // parsed
+
+        const dailyHours = [...Array(date.getHours()).keys()].map((index) => {
+          let newDate = dateAtZeroMin.setTime(dateAtZeroMin - 1 * 3600000);
+          return newDate;
+        });
 
         setStore({
           ...store,
-          chartUnit: "hour",
-          chartDates: currentDayHours,
-          chartData: currentDayData,
+          charts: {
+            ...store.charts,
+            chartUnit: "hour",
+            chartDates: dailyHours,
+            chartData: dailyData,
+            chartMin: Math.min(...dailyData) - 5,
+            chartMax: Math.max(...dailyData) + 5,
+						genericDailyDates: dailyHours,
+          },
         });
       },
-      setWeeklyChart: (pastWeekDates, pastWeekData) => {
+      setWeeklyChart: (weeklyData) => {
         let store = getStore();
+        let date = new Date();
+
+        let dateAtZeroHourInMili =
+          date.getTime() -
+          date.getHours() * 60 * 60 * 1000 -
+          date.getMinutes() * 60 * 1000 -
+          date.getSeconds() * 1000;
+        let dateAtZeroHour = new Date(dateAtZeroHourInMili); // parsed
+
+        const weeklyDates = [...Array(7).keys()].map((index) => {
+          let newDate = dateAtZeroHour.setDate(dateAtZeroHour.getDate() - 1);
+          return newDate;
+        });
 
         setStore({
           ...store,
-          chartUnit: "day",
-          chartDates: pastWeekDates,
-          chartData: pastWeekData,
+          charts: {
+            ...store.charts,
+            chartUnit: "day",
+            chartDates: weeklyDates,
+            chartData: weeklyData,
+            chartMin: Math.min(...weeklyData) - 5,
+            chartMax: Math.max(...weeklyData) + 5,
+						genericWeeklyDates: weeklyDates,
+          },
         });
+      },
+      signup: () => {
+        // fetch a la api
+        // metodo POST
+        // url base /signup
+        // headers: {"Content-Type": "application/json"}
+        // body: {
+        //      "name": "Martin",
+        //      "email": "email@gmail.com",
+        //       "password": "tendigitpassword",
+        //       "controller_sn": ""
+        //      }
+      },
+      login: () => {
+        // fetch
+        // POST
+        // url base /login
+        // headers: {"Content-Type": "application/json"}
+        // body: {
+        //     "email": "email@gmail.com",
+        //     "password": "tendigitpassword"
+        // }   TE RESPONDE UN TOKEN
+        // setStore({
+        // 	...store,
+        // 	user: {
+        // 		token: TOKEN
+        // 	}
+        // })
       },
     },
   };

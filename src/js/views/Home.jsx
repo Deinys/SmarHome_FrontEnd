@@ -1,24 +1,50 @@
 import React from "react";
 
-import AlarmB from "/src/img/alarm-blanca.png";
-import Water from "../../img/water-azul.png";
-import BombilloBlanco from "../../img/bombillo-blanco.png";
-import TempB from "../../img/term-blanco.png";
-
-import { Stack } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import Card from "../components/Card.jsx";
 
 import { Context } from "../context/appContext";
-import LightChart from "../components/LightChart.jsx"
+import LineChart from "../components/LineChart.jsx";
+import BarChart from "../components/BarChart.jsx";
+import DataHistory from "../components/DataHistory.jsx";
+import DataInsights from "../components/DataInsights.jsx";
+import PieChart from "../components/PieChart.jsx";
 
 const Home = () => {
   let context = React.useContext(Context);
-  let currentTab = context.store.currentTab
+  let currentTab = context.store.charts.currentChartTab;
 
   return (
     <div className="container-cuerpo">
-      <div className="contenedor-arriba m-2">
-        <Stack flexDirection={"row"}>
+      <div className="contenedor-arriba">
+        <Stack
+          flexDirection={"row"}
+          marginTop={"60px"}
+          marginBottom={"20px"}
+          justifyContent={"space-between"}
+          alignItems={"center"}
+        >
+          <Stack flexDirection={"row"}>
+            <Typography
+              variant={"h5"}
+              sx={{ fontWeight: 700 }}
+              component={"div"}
+              marginRight={"10px"}
+              color={"rgb(40,40,40)"}
+            >
+              Welcome back, {context.store.user.name}
+            </Typography>
+          </Stack>
+          <Stack flexDirection={"row"}>
+            <Typography
+              variant={"h6"}
+              sx={{ fontWeight: 700 }}
+              component={"div"}
+              marginRight={"10px"}
+            ></Typography>
+          </Stack>
+        </Stack>
+        <Stack flexDirection={"row"} margin={"0 -15px"}>
           {context.store.collection.map((eachObj) => {
             return (
               <Card
@@ -32,172 +58,97 @@ const Home = () => {
           })}
         </Stack>
 
-        <Stack flexDirection={"row"}>
-          {currentTab === "light" ? (
-            <LightChart device={currentTab} />
-          ) : currentTab === "sonar" ? (
-            <LightChart device={currentTab} />
-          ) : currentTab === "thermostat" ? (
-            <LightChart device={currentTab} />
-          ) : currentTab === "motion" ? (
-            <LightChart device={currentTab} />
-          ) : null}
+        <Stack flexDirection={"row"} marginTop={"30px"} marginBottom={"20px"}>
+          <Typography
+            variant={"h5"}
+            color={"rgb(40,40,40)"}
+            sx={{ fontWeight: 700 }}
+          >
+            {currentTab === "intLight"
+              ? "Interior lights details"
+              : currentTab === "sonar"
+              ? "Water level history"
+              : currentTab === "thermostat"
+              ? "Temperature history"
+              : currentTab === "extLight"
+              ? "Exterior lights details"
+              : currentTab === "motion"
+              ? "Motion sensor history"
+              : null}
+          </Typography>
         </Stack>
 
-        <div className="row m-4 p-4">
-          {/* First light control card */}
-          <div className="quinta-col col bg-primary m-4 p-4 rounded-3">
-            <div className="row">
-              <div className="col">
-                <div className="div">
-                  <img src={BombilloBlanco} alt="" height="50" width="50" />
-                </div>
-                <div className="div">
-                  <p className="text-white">Light</p>
-                </div>
-                <div className="div">
-                  <p className="text-white">Interior Light</p>
-                </div>
-                <div className="div">
-                  <div className="form-check form-switch">
-                    <input
-                      className="form-check-input border border-white border border-white"
-                      type="checkbox"
-                      id="flexSwitchCheckDefault"
-                    />
-                    <label
-                      className="form-check-label"
-                      htmlFor="flexSwitchCheckDefault"
-                    ></label>
-                  </div>
-                </div>
-              </div>
-              <div className="col"></div>
-            </div>
-          </div>
-          {/* SEGUNDO CUADRO */}
-          <div className="quinta-col col bg-primary m-4 p-4 rounded-3">
-            <div className="row">
-              <div className="col">
-                <div className="div">
-                  <img src={BombilloBlanco} alt="" height="50" width="50" />
-                </div>
-                <div className="div">
-                  <p className="text-white">Light</p>
-                </div>
-                <div className="div">
-                  <p className="text-white">Exterior Light</p>
-                </div>
-                <div className="div">
-                  <div className="form-check form-switch">
-                    <input
-                      className="form-check-input border border-white border border-white"
-                      type="checkbox"
-                      id="flexSwitchCheckDefault"
-                    />
-                    <label
-                      className="form-check-label"
-                      htmlFor="flexSwitchCheckDefault"
-                    ></label>
-                  </div>
-                </div>
-              </div>
-              <div className="col"></div>
-            </div>
-          </div>
-          {/* TERCER CUADRO */}
-          <div className="quinta-col col bg-primary m-4 p-4 rounded-3">
-            <div className="row">
-              <div className="col">
-                <div className="div">
-                  <img src={Water} alt="" height="50" width="50" />
-                </div>
-                <div className="div">
-                  <p className="text-white">Water Level</p>
-                </div>
-                <div className="div">
-                  <p className="text-white">Water Tank</p>
-                </div>
-                <div className="div">
-                  <div className="form-check form-switch">
-                    <input
-                      className="form-check-input border border-white border border-white"
-                      type="checkbox"
-                      id="flexSwitchCheckDefault"
-                    />
-                    <label
-                      className="form-check-label"
-                      htmlFor="flexSwitchCheckDefault"
-                    ></label>
-                  </div>
-                </div>
-              </div>
-              <div className="col"></div>
-            </div>
-          </div>
-        </div>
-        <div className="row m-4 p-4">
-          {/* CUERTO CUADRO */}
-          <div className="quinta-col col bg-primary m-4 p-4 rounded-3">
-            <div className="row">
-              <div className="col">
-                <div className="div">
-                  <img src={TempB} alt="" height="50" width="50" />
-                </div>
-                <div className="div">
-                  <p className="text-white">Temperature</p>
-                </div>
-                <div className="div">
-                  <p className="text-white">Temperature</p>
-                </div>
-                <div className="div">
-                  <div className="form-check form-switch">
-                    <input
-                      className="form-check-input border border-white border border-white"
-                      type="checkbox"
-                      id="flexSwitchCheckDefault"
-                    />
-                    <label
-                      className="form-check-label"
-                      htmlFor="flexSwitchCheckDefault"
-                    ></label>
-                  </div>
-                </div>
-              </div>
-              <div className="col"></div>
-            </div>
-          </div>
-          {/* QUINTO CUADRO */}
-          <div className="quinta-col col bg-primary m-4 p-4 rounded-3">
-            <div className="row">
-              <div className="col">
-                <div className="div">
-                  <img src={AlarmB} alt="" height="50" width="50" />
-                </div>
-                <div className="div">
-                  <p className="text-white">Motion</p>
-                </div>
-                <div className="div">
-                  <p className="text-white">Motion Sensor</p>
-                </div>
-                <div className="div">
-                  <div className="form-check form-switch">
-                    <input
-                      className="form-check-input border border-white border border-white"
-                      type="checkbox"
-                      id="flexSwitchCheckDefault"
-                    />
-                    <label
-                      className="form-check-label"
-                      htmlFor="flexSwitchCheckDefault"
-                    ></label>
-                  </div>
-                </div>
-              </div>
-              <div className="col"></div>
-            </div>
-          </div>
-        </div>
+        <Stack flexDirection={"row"}>
+          <Stack
+            flexDirection={"column"}
+            width={
+              currentTab === "intLight" || currentTab === "extLight"
+                ? "60%"
+                : "40%"
+            }
+            padding={"30px"}
+            marginRight={"30px"}
+            className={"chart-card"}
+          >
+            {currentTab === "intLight" ? (
+              <DataInsights />
+            ) : currentTab === "sonar" ? (
+              <DataHistory
+                data={context.store.collection[1].data.daily}
+                dataType="Water level"
+                unit="%"
+              />
+            ) : currentTab === "thermostat" ? (
+              <DataHistory data={context.store.collection[2].data.daily} dataType="Temperature" unit="°C" />
+            ) : currentTab === "extLight" ? (
+              <DataInsights />
+            ) : currentTab === "motion" ? (
+              null
+            ) : null}
+          </Stack>
+          <Stack
+            flexDirection={"column"}
+            width={
+              currentTab === "intLight" || currentTab === "extLight"
+                ? "40%"
+                : "60%"
+            }
+            padding={"30px"}
+            className={"chart-card"}
+          >
+            {currentTab === "intLight" ? (
+              <PieChart
+                dailyData={context.store.collection[2].data.daily}
+                weeklyData={context.store.collection[2].data.weekly}
+                device={"Interior lights"}
+              />
+            ) : currentTab === "sonar" ? (
+              <LineChart
+                dailyData={context.store.collection[1].data.daily}
+                weeklyData={context.store.collection[1].data.weekly}
+                device={"Water level"}
+              />
+            ) : currentTab === "thermostat" ? (
+              <BarChart
+                dailyData={context.store.collection[2].data.daily}
+                weeklyData={context.store.collection[2].data.weekly}
+                device={"Temperature"}
+              />
+            ) : currentTab === "extLight" ? (
+              <PieChart
+                dailyData={context.store.collection[2].data.daily}
+                weeklyData={context.store.collection[2].data.weekly}
+                device={"Exterior lights"}
+              />
+            ) : currentTab === "motion" ? (
+              <LineChart
+                dailyData={context.store.collection[2].data.daily}
+                weeklyData={context.store.collection[2].data.weekly}
+                device={"Motion"}
+              />
+            ) : null}
+          </Stack>
+        </Stack>
       </div>
     </div>
   );
