@@ -71,7 +71,7 @@ const Card = ({ id, device, name, status }) => {
                 <DataLabel
                   data={
                     context.store.collection[3].data[
-                      context.store.collection[0].data.length - 1
+                      context.store.collection[3].data.length - 1
                     ].status
                   }
                   unit={null}

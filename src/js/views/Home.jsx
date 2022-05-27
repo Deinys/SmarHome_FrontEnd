@@ -48,7 +48,7 @@ const Home = () => {
           {context.store.collection.map((eachObj) => {
             return (
               <Card
-                key={eachObj.name}
+                key={eachObj.device}
                 id={eachObj.id}
                 device={eachObj.device}
                 name={eachObj.name}
