@@ -10,7 +10,7 @@ const Navbar = () => {
       <nav className="color-navbar navbar navbar-expand-lg navbar-light bg-light">
         <div className="container-fluid">
           <Link to="/">
-            <img src="https://i.ibb.co/JjydpD3/Logo2.png" height="40" />
+            <img src={"https://i.ibb.co/JjydpD3/Logo2.png"} height="70" />
           </Link>
           <button
             className="navbar-toggler bg-light"
@@ -34,24 +34,24 @@ const Navbar = () => {
                 </Link>
               </li>
               {context.store.user.token === "" ? (
-                <div>
-                  <li className="container-fluid">
-                    <Link
-                      className="nav-link active badge rounded-pill fs-5 text-white"
-                      to="/Login"
-                    >
-                      Login
-                    </Link>
-                  </li>
-                  <li className="container-fluid">
-                    <Link
-                      className="nav-link active badge rounded-pill fs-5 text-white"
-                      to="/Signup"
-                    >
-                      Sing Up
-                    </Link>
-                  </li>
-                </div>
+                <li className="container-fluid">
+                  <Link
+                    className="nav-link active badge rounded-pill fs-5 text-white"
+                    to="/Login"
+                  >
+                    Login
+                  </Link>
+                </li>
+              ) : null}
+              {context.store.user.token === "" ? (
+                <li className="container-fluid">
+                  <Link
+                    className="nav-link active badge rounded-pill fs-5 text-white"
+                    to="/Signup"
+                  >
+                    Sign Up
+                  </Link>
+                </li>
               ) : null}
             </ul>
           </div>

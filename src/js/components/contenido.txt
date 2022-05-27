@@ -98,18 +98,6 @@ const Contenido = () => {
                             <div className="col"></div>
                         </div>
                     </div>
-                    {/* FINAL CUADRO */}
-                    {/* <div className="sexta-col col bg-primary m-4 p-4 rounded-3">
-                        <div className="div"><img src={BombilloBlanco} alt="" height="50" width="50" /></div>
-                        <div className="div"><p className="text-white">Motion</p></div>
-                        <div className="div"><p className="text-white">devices</p></div>
-                        <div className="div">
-                            <div class="form-check form-switch">
-                                <input class="form-check-input border border-white border border-white" type="checkbox" id="flexSwitchCheckDefault" />
-                                <label class="form-check-label" for="flexSwitchCheckDefault"></label>
-                            </div>
-                        </div>
-                    </div> */}
                 </div>
             </div>
         </div>

@@ -1,45 +1,42 @@
 import React from "react";
+import Logo from "../../img/Logo2.png";
 
 const Login = () => {
   return (
     <div>
       <div className="container">
-        <div className="container d-flex justify-content-center">
-          <div className="col-md-6">
-            <div className="shadow-lg p-3 mb-5 mt-4 bg-body rounded">
-              <form className="row g-4 needs-validation" noValidate>
-                <div className="container-login col-md-12 rounded-3">
-                  <p className="text-white fs-4">Login</p>
+        <div class="container d-flex justify-content-center">
+          <div class="col-4">
+            <div class="shadow-lg p-4">
+              <form class="row g-4 needs-validation" novalidate>
+                <div className="imagen-login col-md-12 rounded-3">
+                  <img src={Logo} height="70" />
                 </div>
-                <div className="col-md-12">
-                  <label htmlFor="nombre" className="form-label">
-                    User name
-                  </label>
+                <div class="col-12">
+                  <label for="nombre" class="form-label"></label>
                   <input
-                    id="nombre"
-                    name="nombre"
-                    type="text"
-                    className="form-control"
+                    class="form-control"
+                    placeholder="username or email"
                     required
                   />
                 </div>
-                <div className="col-md-12">
-                  <label htmlFor="nombre" className="form-label">
-                    Password
-                  </label>
-                  <input
-                    id="apellido"
-                    name="apellido"
-                    type="text"
-                    className="form-control"
-                    required
-                  />
+                <div class="col-12">
+                  <label for="nombre" class="form-label"></label>
+                  <input class="form-control" placeholder="password" required />
                 </div>
-                <div className="d-grid gap-2 col-6 mx-auto">
-                  <button className="button btn btn-primary">Login</button>
+                <div class="d-grid col-12 ">
+                  <button class="button btn btn-primary">Log in</button>
                 </div>
-                <div className="d-grid gap-2 col-6 mx-auto">
-                  <button className="button btn btn-primary">Sing up</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="container d-flex justify-content-center p-4">
+          <div class="col-4">
+            <div class="shadow-lg p-4">
+              <form class="row g-4 needs-validation" novalidate>
+                <div class="d-grid col-12 ">
+                  {/* <p className="fw-bold">Don't have an account ?  <a href="#" class="stretched-link">Sing Up</a></p> */}
                 </div>
               </form>
             </div>
