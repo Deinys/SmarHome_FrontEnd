@@ -1,6 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
+      BASE_URL: "127.0.0.1:8000",
       user: {
         name: "Raul",
         token: "",
@@ -9,8 +10,8 @@ const getState = ({ getStore, getActions, setStore }) => {
         chartMin: 0,
         chartMax: 100,
         chartUnit: "",
-				genericWeeklyDates: [],
-				genericDailyDates: [],
+        genericWeeklyDates: [],
+        genericDailyDates: [],
         chartDates: [],
         chartData: [
           21, 24, 23, 21, 24, 23, 21, 22, 23, 21, 24, 23, 23, 21, 24, 23, 23,
@@ -41,11 +42,11 @@ const getState = ({ getStore, getActions, setStore }) => {
           name: "Water level",
           status: true,
           data: {
-            weekly: [60, 54, 50, 88, 82, 75, 69].reverse(),
+            weekly: [60, 54, 50, 88, 82, 75, 69],
             daily: [
               62, 61, 60, 60, 60, 59, 57, 53, 53, 53, 52, 52, 50, 50, 49, 44,
               44, 44, 44, 43, 42, 42, 42, 40,
-            ].reverse(),
+            ],
           },
         },
         {
@@ -96,6 +97,47 @@ const getState = ({ getStore, getActions, setStore }) => {
       ],
     },
     actions: {
+      getLastEntry: async () => {
+        let store = getStore();
+
+        let response = await fetch(`${BASE_URL}/single-entry`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${store.user.token}`,
+          },
+        });
+        if (response.ok) {
+          let data = await response.json();
+          let currentDevice = store.collection.find((eachObj) => {
+            return eachObj.device === data.results.device_type;
+          });
+
+          let deviceIndex =
+            store.collection[store.collection.findIndex(currentDevice)];
+          let newData = 0;
+          let newArr = [];
+
+          if (typeOf(store.collection[deviceIndex].data) === "array") {
+            newArr = [
+              ...store.collection[deviceIndex].data.daily,
+              store.collection[deviceIndex].data.push(data.results.device_data),
+            ];
+          } else {
+            newArr = [
+              ...store.collection[deviceIndex].data.daily,
+              store.collection[deviceIndex].data.daily.push(
+                data.results.device_data
+              ),
+            ];
+          }
+
+          setStore({
+            ...store,
+            collection: newArr,
+          });
+        }
+      },
+
       setSensorStatus: (id) => {
         let store = getStore();
 
@@ -162,7 +204,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             chartData: dailyData,
             chartMin: Math.min(...dailyData) - 5,
             chartMax: Math.max(...dailyData) + 5,
-						genericDailyDates: dailyHours,
+            genericDailyDates: dailyHours,
           },
         });
       },
@@ -191,7 +233,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             chartData: weeklyData,
             chartMin: Math.min(...weeklyData) - 5,
             chartMax: Math.max(...weeklyData) + 5,
-						genericWeeklyDates: weeklyDates,
+            genericWeeklyDates: weeklyDates,
           },
         });
       },
