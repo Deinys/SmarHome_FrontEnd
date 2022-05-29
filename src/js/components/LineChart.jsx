@@ -31,7 +31,7 @@ ChartJS.register(
   TimeScale
 );
 
-const LineChart = ({ dailyData, weeklyData, device }) => {
+const LineChart = ({ realData, dailyData, weeklyData, device }) => {
   let context = React.useContext(Context);
 
   // fecha de los ultimos 7 dias incluyendo hoy
@@ -40,6 +40,10 @@ const LineChart = ({ dailyData, weeklyData, device }) => {
 
   // horas que han pasado hoy. 4am retorna [1, 2, 3, 4]
   // se tiene que actualizar cada vez que le llega info (cada hora)
+
+  const handleLiveClick = () => {
+    context.actions.setLiveChart(realData);
+  };
 
   const handleDailyClick = () => {
     context.actions.setDailyChart(dailyData);
@@ -94,9 +98,12 @@ const LineChart = ({ dailyData, weeklyData, device }) => {
         marginBottom={"20px"}
       >
         <Stack flexDirection={"row"}>
-          <Typography variant={"h6"} sx={{fontWeight: 500}}>{device} chart</Typography>
+          <Typography variant={"h6"} sx={{ fontWeight: 500 }}>
+            Live chart
+          </Typography>
         </Stack>
         <Stack flexDirection={"row"}>
+          <button onClick={handleLiveClick}>Now</button>
           <button onClick={handleDailyClick}>Today</button>
           <button onClick={handleWeeklyClick}>Last 7 days</button>
         </Stack>

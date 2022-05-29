@@ -56,7 +56,6 @@ body {
   cursor: pointer;
   text-decoration: underline
 }
-<<<<<<< HEAD
 
 .imagen-login{
   width: auto;
@@ -64,5 +63,9 @@ body {
   margin-left: auto;
   margin-right: auto;
 }
-=======
->>>>>>> test
+
+.extra-border {
+  box-shadow: 0 0 0 2px rgba(0,0,0,.7);
+  -webkit-box-shadow: 0 0 0 2px rgba(0,0,0,.7);
+  -moz-box-shadow: 0 0 0 2px rgba(0,0,0,.7); 
+}

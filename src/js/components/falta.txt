@@ -1,11 +1,22 @@
+// landing page
 
 
-landing page
-
-avatar dropdown menu perfil
-
-integracion login sign up
-
-integracion entradas de datos
+// avatar dropdown menu perfil
+// integracion login sign up
 
 
+// integracion entradas de datos
+
+import { Stack, Typography } from "@mui/material";
+
+<Stack flexDirection={"column"}>
+  <Stack flexDirection={"row"}>
+    <Stack flexDirection={"column"} width={"50%"}>
+      <Typography variant={"h1"} component={"div"}>
+        Titulo 1
+      </Typography>
+      <Typography variant={"h1"}>Titulo 1</Typography>
+    </Stack>
+    <Stack flexDirection={"column"} width={"50%"}></Stack>
+  </Stack>
+</Stack>;

@@ -12,11 +12,9 @@ const getState = ({ getStore, getActions, setStore }) => {
         chartUnit: "",
         genericWeeklyDates: [],
         genericDailyDates: [],
+        genericLiveDates: [],
         chartDates: [],
-        chartData: [
-          21, 24, 23, 21, 24, 23, 21, 22, 23, 21, 24, 23, 23, 21, 24, 23, 23,
-          21, 22, 23, 21, 24, 23, 23,
-        ],
+        chartData: [],
         currentChartTab: "",
       },
       collection: [
@@ -25,22 +23,40 @@ const getState = ({ getStore, getActions, setStore }) => {
           device: "intLight",
           name: "Interior lights",
           status: true,
-          data: [
+          realData: [
             {
-              date: "Sat, 27 May 2022 18:47:38 GMT",
-              status: false,
+              date: "Sat, 29 May 2022 05:07:12 GMT",
+              data: true,
             },
             {
-              date: "Sat, 27 May 2022 18:47:38 GMT",
-              status: false,
+              date: "Sat, 29 May 2022 05:07:20 GMT",
+              data: false,
             },
-          ],
+            {
+              date: "Sat, 29 May 2022 05:08:22 GMT",
+              data: true,
+            },
+            {
+              date: "Sat, 29 May 2022 05:21:02 GMT",
+              data: false,
+            },
+          ].reverse(),
         },
         {
           id: 1,
           device: "sonar",
           name: "Water level",
           status: true,
+          realData: [
+            {
+              date: "Sun, 29 May 2022 04:08:38 GMT",
+              data: 59,
+            },
+            {
+              date: "Sun, 29 May 2022 04:07:38 GMT",
+              data: 60,
+            },
+          ],
           data: {
             weekly: [60, 54, 50, 88, 82, 75, 69],
             daily: [
@@ -54,6 +70,16 @@ const getState = ({ getStore, getActions, setStore }) => {
           device: "thermostat",
           name: "Temperature",
           status: true,
+          realData: [
+            {
+              date: "Sun, 29 May 2022 04:08:38 GMT",
+              data: 22,
+            },
+            {
+              date: "Sun, 29 May 2022 04:07:38 GMT",
+              data: 23,
+            },
+          ],
           data: {
             weekly: [22, 24, 22, 21, 24, 23, 21],
             daily: [
@@ -67,14 +93,14 @@ const getState = ({ getStore, getActions, setStore }) => {
           device: "extLight",
           name: "Exterior lights",
           status: true,
-          data: [
+          realData: [
             {
               date: "Sat, 27 May 2022 18:47:38 GMT",
-              status: false,
+              data: false,
             },
             {
               date: "Sat, 27 May 2022 18:47:38 GMT",
-              status: false,
+              data: false,
             },
           ],
         },
@@ -83,14 +109,22 @@ const getState = ({ getStore, getActions, setStore }) => {
           device: "motion",
           name: "Motion",
           status: true,
-          data: [
+          realData: [
             {
-              date: "Sat, 27 May 2022 18:47:38 GMT",
-              status: false,
+              date: "Sat, 29 May 2022 17:07:38 GMT",
+              data: false,
             },
             {
-              date: "Sat, 27 May 2022 18:47:38 GMT",
-              status: false,
+              date: "Sat, 29 May 2022 17:09:38 GMT",
+              data: true,
+            },
+            {
+              date: "Sat, 29 May 2022 17:11:38 GMT",
+              data: false,
+            },
+            {
+              date: "Sat, 29 May 2022 17:14:38 GMT",
+              data: true,
             },
           ],
         },
@@ -100,9 +134,8 @@ const getState = ({ getStore, getActions, setStore }) => {
       getLastEntry: async () => {
         let store = getStore();
 
-        let response = await fetch(`${BASE_URL}/single-entry`, {
+        let response = await fetch(`${BASE_URL}/entries`, {
           headers: {
-            "Content-Type": "application/json",
             Authorization: `Bearer ${store.user.token}`,
           },
         });
@@ -157,19 +190,19 @@ const getState = ({ getStore, getActions, setStore }) => {
         let actions = getActions();
 
         if (device === "intLight") {
-          actions.setDailyChart(store.collection[1].data.daily);
+          actions.setLiveChart(store.collection[0].realData);
         }
         if (device === "sonar") {
-          actions.setDailyChart(store.collection[1].data.daily);
+          actions.setLiveChart(store.collection[1].realData);
         }
         if (device === "thermostat") {
-          actions.setDailyChart(store.collection[2].data.daily);
+          actions.setLiveChart(store.collection[2].realData);
         }
         if (device === "extLight") {
-          actions.setDailyChart(store.collection[2].data.daily);
+          actions.setLiveChart(store.collection[3].realData);
         }
         if (device === "motion") {
-          actions.setDailyChart(store.collection[1].data.daily);
+          actions.setLiveChart(store.collection[4].realData);
         }
 
         setStore({
@@ -177,6 +210,28 @@ const getState = ({ getStore, getActions, setStore }) => {
           charts: {
             ...store.charts,
             currentChartTab: device,
+          },
+        });
+      },
+      setLiveChart: (realData) => {
+        let store = getStore();
+
+        let dateArr = realData.map((eachObj) => {
+          return new Date(eachObj.date);
+        });
+        let dataArr = realData.map((eachObj) => {
+          return eachObj.data;
+        });
+
+        setStore({
+          ...store,
+          charts: {
+            ...store.charts,
+            chartUnit: "minute",
+            chartDates: dateArr,
+            chartData: dataArr,
+            chartMin: Math.min(...dataArr) - 5,
+            chartMax: Math.max(...dataArr) + 5,
           },
         });
       },
@@ -236,34 +291,6 @@ const getState = ({ getStore, getActions, setStore }) => {
             genericWeeklyDates: weeklyDates,
           },
         });
-      },
-      signup: () => {
-        // fetch a la api
-        // metodo POST
-        // url base /signup
-        // headers: {"Content-Type": "application/json"}
-        // body: {
-        //      "name": "Martin",
-        //      "email": "email@gmail.com",
-        //       "password": "tendigitpassword",
-        //       "controller_sn": ""
-        //      }
-      },
-      login: () => {
-        // fetch
-        // POST
-        // url base /login
-        // headers: {"Content-Type": "application/json"}
-        // body: {
-        //     "email": "email@gmail.com",
-        //     "password": "tendigitpassword"
-        // }   TE RESPONDE UN TOKEN
-        // setStore({
-        // 	...store,
-        // 	user: {
-        // 		token: TOKEN
-        // 	}
-        // })
       },
     },
   };

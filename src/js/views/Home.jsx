@@ -9,6 +9,7 @@ import BarChart from "../components/BarChart.jsx";
 import DataHistory from "../components/DataHistory.jsx";
 import DataInsights from "../components/DataInsights.jsx";
 import PieChart from "../components/PieChart.jsx";
+import ColumnChart from "../components/ColumnChart.jsx";
 
 const Home = () => {
   let context = React.useContext(Context);
@@ -83,27 +84,41 @@ const Home = () => {
             flexDirection={"column"}
             width={
               currentTab === "intLight" || currentTab === "extLight"
-                ? "60%"
-                : "40%"
+                ? "65%"
+                : "35%"
             }
             padding={"30px"}
             marginRight={"30px"}
             className={"chart-card"}
           >
             {currentTab === "intLight" ? (
-              <DataInsights />
+              <DataInsights
+                realData={context.store.collection[0].realData}
+                device={"intLight"}
+              />
             ) : currentTab === "sonar" ? (
               <DataHistory
-                data={context.store.collection[1].data.daily}
+                realData={context.store.collection[1].realData}
                 dataType="Water level"
                 unit="%"
               />
             ) : currentTab === "thermostat" ? (
-              <DataHistory data={context.store.collection[2].data.daily} dataType="Temperature" unit="°C" />
+              <DataHistory
+                realData={context.store.collection[2].realData}
+                dataType="Temperature"
+                unit="°C"
+              />
             ) : currentTab === "extLight" ? (
-              <DataInsights />
+              <DataInsights
+                realData={context.store.collection[3].realData}
+                device={"extLight"}
+              />
             ) : currentTab === "motion" ? (
-              null
+              <DataHistory
+                realData={context.store.collection[4].realData}
+                dataType="Motion"
+                unit={null}
+              />
             ) : null}
           </Stack>
           <Stack
@@ -118,32 +133,31 @@ const Home = () => {
           >
             {currentTab === "intLight" ? (
               <PieChart
-                dailyData={context.store.collection[2].data.daily}
-                weeklyData={context.store.collection[2].data.weekly}
+                realData={context.store.collection[0].realData}
                 device={"Interior lights"}
               />
             ) : currentTab === "sonar" ? (
-              <LineChart
+              <BarChart
+                realData={context.store.collection[1].realData}
                 dailyData={context.store.collection[1].data.daily}
                 weeklyData={context.store.collection[1].data.weekly}
                 device={"Water level"}
               />
             ) : currentTab === "thermostat" ? (
-              <BarChart
+              <LineChart
+                realData={context.store.collection[2].realData}
                 dailyData={context.store.collection[2].data.daily}
                 weeklyData={context.store.collection[2].data.weekly}
                 device={"Temperature"}
               />
             ) : currentTab === "extLight" ? (
               <PieChart
-                dailyData={context.store.collection[2].data.daily}
-                weeklyData={context.store.collection[2].data.weekly}
+                realData={context.store.collection[3].realData}
                 device={"Exterior lights"}
               />
             ) : currentTab === "motion" ? (
-              <LineChart
-                dailyData={context.store.collection[2].data.daily}
-                weeklyData={context.store.collection[2].data.weekly}
+              <ColumnChart
+                realData={context.store.collection[4].realData}
                 device={"Motion"}
               />
             ) : null}

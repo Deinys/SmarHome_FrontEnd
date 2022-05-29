@@ -7,14 +7,14 @@ import {
   CategoryScale,
   LinearScale,
   PointElement,
-  BarElement,
+  LineElement,
   Title,
   Tooltip,
   Legend,
   Filler,
   TimeScale,
 } from "chart.js";
-import { Bar } from "react-chartjs-2";
+import { Line } from "react-chartjs-2";
 import "chartjs-adapter-date-fns";
 
 import { Context } from "../context/appContext";
@@ -23,7 +23,7 @@ ChartJS.register(
   CategoryScale,
   LinearScale,
   PointElement,
-  BarElement,
+  LineElement,
   Title,
   Tooltip,
   Legend,
@@ -31,7 +31,7 @@ ChartJS.register(
   TimeScale
 );
 
-const BarChart = ({ realData, dailyData, weeklyData, device }) => {
+const ColumnChart = ({ realData, device }) => {
   let context = React.useContext(Context);
 
   // fecha de los ultimos 7 dias incluyendo hoy
@@ -41,19 +41,6 @@ const BarChart = ({ realData, dailyData, weeklyData, device }) => {
   // horas que han pasado hoy. 4am retorna [1, 2, 3, 4]
   // se tiene que actualizar cada vez que le llega info (cada hora)
 
-
-  const handleLiveClick = () => {
-    context.actions.setLiveChart(realData);
-  };
-
-  const handleDailyClick = () => {
-    context.actions.setDailyChart(dailyData);
-  };
-
-  const handleWeeklyClick = () => {
-    context.actions.setWeeklyChart(weeklyData);
-  };
-
   const data = {
     labels: context.store.charts.chartDates,
     datasets: [
@@ -62,7 +49,8 @@ const BarChart = ({ realData, dailyData, weeklyData, device }) => {
         data: context.store.charts.chartData,
         tension: 0.2,
         borderColor: "rgb(75, 192, 192)",
-        backgroundColor: "rgb(75, 192, 192)",
+        pointRadius: 6,
+        pointBackgroundColor: "rgb(75, 192, 192)",
       },
     ],
   };
@@ -70,9 +58,6 @@ const BarChart = ({ realData, dailyData, weeklyData, device }) => {
   const options = {
     responsive: true,
     animations: false,
-    elements: {
-      bar: { borderWidth: 2 },
-    },
     plugins: {
       legend: {
         display: false,
@@ -96,7 +81,6 @@ const BarChart = ({ realData, dailyData, weeklyData, device }) => {
     <>
       <Stack
         flexDirection={"row"}
-        justifyContent={"space-between"}
         alignItems={"center"}
         marginBottom={"20px"}
       >
@@ -105,17 +89,12 @@ const BarChart = ({ realData, dailyData, weeklyData, device }) => {
             Live chart
           </Typography>
         </Stack>
-        <Stack flexDirection={"row"}>
-          <button onClick={handleLiveClick}>Now</button>
-          <button onClick={handleDailyClick}>Today</button>
-          <button onClick={handleWeeklyClick}>Last 7 days</button>
-        </Stack>
       </Stack>
       <Stack flexDirection={"row"}>
-        <Bar data={data} options={options} />
+        <Line data={data} options={options} />
       </Stack>
     </>
   );
 };
 
-export default BarChart;
+export default ColumnChart;

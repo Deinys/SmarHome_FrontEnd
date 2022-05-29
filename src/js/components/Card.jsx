@@ -23,9 +23,19 @@ const Card = ({ id, device, name, status }) => {
 
   return (
     <>
-      <div className="col collection-card p-4">
+      <div
+        className={
+          device === context.store.charts.currentChartTab
+            ? "col collection-card p-4 extra-border"
+            : "col collection-card p-4"
+        }
+      >
         <div className="col">
-          <Stack flexDirection={"row"} justifyContent={"space-between"} alignItems={"center"}>
+          <Stack
+            flexDirection={"row"}
+            justifyContent={"space-between"}
+            alignItems={"center"}
+          >
             <Stack>
               {device === "intLight" ? (
                 <LightbulbIcon fontSize={"large"} />
@@ -43,46 +53,65 @@ const Card = ({ id, device, name, status }) => {
               {device === "intLight" ? (
                 <DataLabel
                   data={
-                    context.store.collection[0].data[
-                      context.store.collection[0].data.length - 1
-                    ].status
+                    context.store.collection[0].realData != []
+                      ? context.store.collection[0].realData[
+                          context.store.collection[0].realData.length - 1
+                        ].data
+                      : null
                   }
+                  device={device}
                   unit={null}
                 />
               ) : device === "sonar" ? (
                 <DataLabel
                   data={
-                    context.store.collection[1].data.daily[
-                      context.store.collection[1].data.daily.length - 1
-                    ]
+                    context.store.collection[1].realData != []
+                      ? context.store.collection[1].realData[
+                          context.store.collection[1].realData.length - 1
+                        ].data
+                      : null
                   }
-                  unit={"%"}
+                  device={device}
+                  unit={
+                    context.store.collection[1].realData.length ? "%" : null
+                  }
                 />
               ) : device === "thermostat" ? (
                 <DataLabel
                   data={
-                    context.store.collection[2].data.daily[
-                      context.store.collection[2].data.daily.length - 1
-                    ]
+                    context.store.collection[2].realData != []
+                      ? context.store.collection[2].realData[
+                          context.store.collection[2].realData.length - 1
+                        ].data
+                      : null
                   }
-                  unit={"°C"}
+                  device={device}
+                  unit={
+                    context.store.collection[2].realData.length ? "°C" : null
+                  }
                 />
               ) : device === "extLight" ? (
                 <DataLabel
                   data={
-                    context.store.collection[3].data[
-                      context.store.collection[3].data.length - 1
-                    ].status
+                    context.store.collection[3].realData != []
+                      ? context.store.collection[3].realData[
+                          context.store.collection[3].realData.length - 1
+                        ].data
+                      : null
                   }
+                  device={device}
                   unit={null}
                 />
               ) : device === "motion" ? (
                 <DataLabel
                   data={
-                    context.store.collection[4].data[
-                      context.store.collection[0].data.length - 1
-                    ].status
+                    context.store.collection[4].realData != []
+                      ? context.store.collection[4].realData[
+                          context.store.collection[4].realData.length - 1
+                        ].data
+                      : null
                   }
+                  device={device}
                   unit={null}
                 />
               ) : null}
