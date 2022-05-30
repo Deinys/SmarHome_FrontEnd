@@ -1,47 +1,55 @@
 import { Stack, Typography } from "@mui/material";
-import React, { useContext } from "react";
+import React from "react";
 
 import { DataGrid } from "@mui/x-data-grid";
-import { Context } from "../context/appContext";
+//import { Context } from "../context/appContext";
 
-const DataHistory = ({ data, dataType, unit }) => {
-  let context = useContext(Context);
+const DataHistory = ({ realData, dataType, unit }) => {
+  //let context = React.useContext(Context);
 
   const columns = [
     { field: "id", headerName: "ID", width: 90 },
     {
       field: "date",
-      headerName: "Date created",
-      width: 130,
+      headerName: "Date",
+      width: 120,
       editable: false,
     },
     {
       field: "data",
-      headerName: `${dataType} (${unit})`,
+      headerName: `${dataType}`,
       type: "number",
-      width: 130,
+      width: 160,
       editable: true,
     },
   ];
 
-  let dates = context.store.charts.genericDailyDates;
+  //let dates = context.store.charts.;
 
-
-  let newRows = data.map((each, index) => {
-    return {
-      id: index + 1,
-      data: each,
-      date: new Date(dates[index])
-    }
-  })
-  
-  console.log(newRows)
+  let newRows = []
+  if (dataType === "Motion") {
+    newRows = realData.map((eachObj, index) => {
+      return {
+        id: index + 1,
+        data: eachObj.data === false ? "No" : "Yes",
+        date: new Date(eachObj.date).toLocaleTimeString('en-US')
+      }
+    })
+  } else {
+    newRows = realData.map((eachObj, index) => {
+      return {
+        id: index + 1,
+        data: `${eachObj.data}${unit}`,
+        date: new Date(eachObj.date).toLocaleTimeString('en-US')
+      }
+    })
+  }
 
   return (
     <>
       <Stack flexDirection={"row"} marginBottom={"20px"}>
         <Typography variant={"h6"} sx={{ fontWeight: 500 }}>
-          Daily data history
+          Data history
         </Typography>
       </Stack>
       <div style={{ display: "flex", height: "100%" }}>

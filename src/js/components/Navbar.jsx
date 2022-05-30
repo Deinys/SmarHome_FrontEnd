@@ -1,4 +1,5 @@
 import React from "react";
+import { Container, Stack, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import { Context } from "../context/appContext";
 
@@ -8,54 +9,54 @@ const Navbar = () => {
   return (
     <div>
       <nav className="color-navbar navbar navbar-expand-lg navbar-light bg-light">
-        <div className="container-fluid">
-          <Link to="/">
-            <img src={"https://i.ibb.co/JjydpD3/Logo2.png"} height="70" />
-          </Link>
-          <button
-            className="navbar-toggler bg-light"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNavDropdown"
-            aria-controls="navbarNavDropdown"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
+        <Container maxWidth={"xl"}>
+          <Stack
+            flexDirection={"row"}
+            justifyContent={"space-between"}
+            alignItems={"center"}
           >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul className="navbar-nav ms-auto">
-              <li className="container-fluid">
-                <Link
-                  className="nav-link active badge rounded-pill fs-5 text-white"
-                  to="/"
-                >
-                  Home
-                </Link>
-              </li>
+            <Stack flexDirection={"column"}>
+              <Link to="/">
+                <img src={"https://i.ibb.co/JjydpD3/Logo2.png"} height="60" />
+              </Link>
+            </Stack>
+
+            <Stack flexDirection={"column"}>
               {context.store.user.token === "" ? (
-                <li className="container-fluid">
-                  <Link
-                    className="nav-link active badge rounded-pill fs-5 text-white"
-                    to="/Login"
-                  >
-                    Login
+                <Stack flexDirection={"row"}>
+                  <Link to="/">
+                    <Typography variant={"h6"} component={"div"} color={"#000"} sx={{marginLeft: "30px"}}>
+                      Dashboard
+                    </Typography>
                   </Link>
-                </li>
-              ) : null}
-              {context.store.user.token === "" ? (
-                <li className="container-fluid">
-                  <Link
-                    className="nav-link active badge rounded-pill fs-5 text-white"
-                    to="/Signup"
-                  >
-                    Sign Up
+                  <Link to="/login">
+                    <Typography variant={"h6"} component={"div"} color={"#000"} sx={{marginLeft: "30px"}}>
+                      Log In
+                    </Typography>
                   </Link>
-                </li>
-              ) : null}
-            </ul>
-          </div>
-        </div>
+                  <Link to="/signup">
+                    <Typography variant={"h6"} component={"div"} color={"#000"} sx={{marginLeft: "30px"}}>
+                      Sign Up
+                    </Typography>
+                  </Link>
+                </Stack>
+              ) : (
+                <Stack flexDirection={"row"}>
+                  <Link to="/">
+                    <Typography variant={"h6"} component={"div"} color={"#000"} sx={{marginLeft: "30px"}}>
+                      Dashboard
+                    </Typography>
+                  </Link>
+                  <Link to="/signout">
+                    <Typography variant={"h6"} component={"div"} color={"#000"} sx={{marginLeft: "30px"}}>
+                      Sign Out
+                    </Typography>
+                  </Link>
+                </Stack>
+              )}
+            </Stack>
+          </Stack>
+        </Container>
       </nav>
     </div>
   );

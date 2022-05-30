@@ -2,37 +2,62 @@ import { Stack, Typography } from "@mui/material";
 import React from "react";
 
 import { DataGrid } from "@mui/x-data-grid";
+//import { Context } from "../context/appContext";
 
-const columns = [
-  { field: "id", headerName: "ID", width: 90 },
-  {
-    field: "date",
-    headerName: "Date",
-    width: 150,
-    editable: false,
-  },
-  {
-    field: "data",
-    headerName: "",
-    type: "number",
-    width: 150,
-    editable: true,
-  },
-];
+const DataInsights = ({ realData, device }) => {
+  //let context = React.useContext(Context);
 
-const rows = [
-  { id: 1, firstName: "Jon", age: 35 },
-  { id: 2, firstName: "Cersei", age: 42 },
-  { id: 3, firstName: "Jaime", age: 45 },
-  { id: 4, firstName: "Arya", age: 16 },
-  { id: 5, firstName: "Daenerys", age: 23 },
-  { id: 6, firstName: "Rascal", age: 150 },
-  { id: 7, firstName: "Ferrara", age: 44 },
-  { id: 8, firstName: "Rossini", age: 36 },
-  { id: 9, firstName: "Harvey", age: 65 },
-];
+  const columns = [
+    { field: "id", headerName: "ID", width: 90 },
+    {
+      field: "date",
+      headerName: "Date",
+      width: 120,
+      editable: false,
+    },
+    {
+      field: "status",
+      headerName: "Status",
+      type: "number",
+      width: 120,
+      editable: false,
+    },
+    {
+      field: "duration",
+      headerName: "Duration",
+      type: "number",
+      width: 150,
+      editable: false,
+    },
+    {
+      field: "power",
+      headerName: "Power consumption",
+      type: "number",
+      width: 210,
+      editable: false,
+    },
+  ];
 
-const DataInsights = ({ d }) => {
+  const newRows = realData.map((eachObj, index) => {
+    return {
+      id: index + 1,
+      status: eachObj.data ? "ON" : "OFF",
+      date: new Date(eachObj.date).toLocaleTimeString("en-US"),
+      duration:
+        index != 0
+          ? ((new Date(realData[index - 1].date).getTime() -
+              new Date(realData[index].date).getTime()) /
+              60000).toFixed(1) +
+            " min"
+          : null,
+      // suponiendo que el bombillo es de 0.1kW o 100W
+      power: index != 0
+      ? ((new Date(realData[index - 1].date).getTime() -
+          new Date(realData[index].date).getTime()) * 100 /
+          3600000).toFixed(1) + " Wh" : null
+    };
+  });
+
   return (
     <>
       <Stack flexDirection={"row"} marginBottom={"20px"}>
@@ -43,7 +68,7 @@ const DataInsights = ({ d }) => {
       <div style={{ display: "flex", height: "100%" }}>
         <div style={{ flexGrow: 1 }}>
           <DataGrid
-            rows={rows}
+            rows={newRows}
             columns={columns}
             pageSize={24}
             rowsPerPageOptions={[5]}

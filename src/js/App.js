@@ -33,14 +33,12 @@ const App = () => {
       <ThemeProvider theme={theme}>
         <BrowserRouter basename={basename}>
           <Layout>
-            <div className="container">
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/Login" element={<Login />} />
-                <Route path="/Signup" element={<Signup />} />
-                <Route path="*" element={<h1>404 Not found</h1>} />
-              </Routes>
-            </div>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/Login" element={<Login />} />
+              <Route path="/Signup" element={<Signup />} />
+              <Route path="*" element={<h1>404 Not found</h1>} />
+            </Routes>
           </Layout>
         </BrowserRouter>
       </ThemeProvider>

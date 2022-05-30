@@ -31,7 +31,7 @@ ChartJS.register(
   TimeScale
 );
 
-const LineChart = ({ realData, dailyData, weeklyData, device }) => {
+const ColumnChart = ({ realData, device }) => {
   let context = React.useContext(Context);
 
   // fecha de los ultimos 7 dias incluyendo hoy
@@ -40,18 +40,6 @@ const LineChart = ({ realData, dailyData, weeklyData, device }) => {
 
   // horas que han pasado hoy. 4am retorna [1, 2, 3, 4]
   // se tiene que actualizar cada vez que le llega info (cada hora)
-
-  const handleLiveClick = () => {
-    context.actions.setLiveChart(realData);
-  };
-
-  const handleDailyClick = () => {
-    context.actions.setDailyChart(dailyData);
-  };
-
-  const handleWeeklyClick = () => {
-    context.actions.setWeeklyChart(weeklyData);
-  };
 
   const data = {
     labels: context.store.charts.chartDates,
@@ -93,7 +81,6 @@ const LineChart = ({ realData, dailyData, weeklyData, device }) => {
     <>
       <Stack
         flexDirection={"row"}
-        justifyContent={"space-between"}
         alignItems={"center"}
         marginBottom={"20px"}
       >
@@ -101,40 +88,6 @@ const LineChart = ({ realData, dailyData, weeklyData, device }) => {
           <Typography variant={"h6"} sx={{ fontWeight: 500 }}>
             Live chart
           </Typography>
-        </Stack>
-        <Stack flexDirection={"row"}>
-          <button
-            className={
-              context.store.charts.currentChartFilter === "now"
-                ? "chart-button selected-filter"
-                : "chart-button"
-            }
-            onClick={handleLiveClick}
-          >
-            <Typography variant="body2" sx={{ fontWeight: 400 }}>
-              Now
-            </Typography>
-          </button>
-          <button
-            className={
-              context.store.charts.currentChartFilter === "today"
-                ? "chart-button selected-filter"
-                : "chart-button"
-            }
-            onClick={handleDailyClick}
-          >
-            <Typography variant="body2" sx={{ fontWeight: 400 }}>Today</Typography>
-          </button>
-          <button
-            className={
-              context.store.charts.currentChartFilter === "last7days"
-                ? "chart-button selected-filter"
-                : "chart-button"
-            }
-            onClick={handleWeeklyClick}
-          >
-            <Typography variant="body2" sx={{ fontWeight: 400 }}>Last 7 days</Typography>
-          </button>
         </Stack>
       </Stack>
       <Stack flexDirection={"row"}>
@@ -144,4 +97,4 @@ const LineChart = ({ realData, dailyData, weeklyData, device }) => {
   );
 };
 
-export default LineChart;
+export default ColumnChart;
