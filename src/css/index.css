@@ -4,7 +4,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap');
 
 body {
-  background-color: rgba(73, 170, 255, 0.204)
+  background-color: rgba(77, 172, 255, 0.139)
 }
 
 .principal{
@@ -38,13 +38,23 @@ body {
   filter: shadow(color=#131763, direction=135, strength=2);
 } */
 
+a {
+  outline: none;
+  text-decoration: none;
+}
+
+a:hover {
+  cursor: pointer;
+  text-decoration: underline
+}
+
 .collection-card, .chart-card {
   background-color: #FFF;
-  border-radius: 10px;
-  /* box-shadow: 1px -1px 20px -2px rgba(0,0,0,0.1);
-  -webkit-box-shadow: 1px -1px 20px -2px rgba(0,0,0,0.1);
-  -moz-box-shadow: 1px -1px 20px -2px rgba(0,0,0,0.1); 
-  border: 1px solid rgb(236, 236, 236);*/
+  border-radius: 5px;
+  box-shadow: 1px -1px 40px -2px rgba(0,0,0,0.05);
+  -webkit-box-shadow: 1px -1px 40px -2px rgba(0,0,0,0.05);
+  -moz-box-shadow: 1px -1px 40px -2px rgba(0,0,0,0.05); 
+  border: 1px solid rgb(255, 255, 255);
 }
 
 .collection-card {
@@ -65,7 +75,40 @@ body {
 }
 
 .extra-border {
-  box-shadow: 0 0 0 2px rgba(0,0,0,.7);
-  -webkit-box-shadow: 0 0 0 2px rgba(0,0,0,.7);
-  -moz-box-shadow: 0 0 0 2px rgba(0,0,0,.7); 
+  -webkit-box-shadow: 0 0 0px 2px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0 0 0px 2px rgba(0,0,0,0.75);
+  box-shadow: 0 0 0px 2px rgba(0,0,0,0.75);
+}
+
+.form-switch .form-check-input {
+  margin-left: 0;
+}
+.form-check-input:checked {
+  background-color: rgba(0, 5, 10, 0.867)
+}
+
+.red-alert {
+  color: red;
+  animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+
+.chart-button {
+  margin: 0 5px;
+  padding: 3px 8px;
+  background-color: white;
+  border-radius: 3px;
+  outline: none;
+  border: 1px solid black;
+  color: rgba(0, 0, 0, 0.848);
+}
+
+.chart-button:hover, .selected-filter {
+  background-color: rgba(0, 0, 0, 0.848);
+  color: white;
 }

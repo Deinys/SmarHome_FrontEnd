@@ -30,13 +30,23 @@ const Card = ({ id, device, name, status }) => {
             : "col collection-card p-4"
         }
       >
-        <div className="col">
+        <div className={""}>
           <Stack
             flexDirection={"row"}
             justifyContent={"space-between"}
             alignItems={"center"}
           >
-            <Stack>
+            <Stack
+              className={
+                device === "motion" &&
+                context.store.collection[4].status === true &&
+                context.store.collection[4].realData[
+                  context.store.collection[4].realData.length - 1
+                ].data === true
+                  ? "red-alert"
+                  : ""
+              }
+            >
               {device === "intLight" ? (
                 <LightbulbIcon fontSize={"large"} />
               ) : device === "sonar" ? (
@@ -49,77 +59,96 @@ const Card = ({ id, device, name, status }) => {
                 <AnimationIcon fontSize={"large"} />
               ) : null}
             </Stack>
-            <Stack>
-              {device === "intLight" ? (
-                <DataLabel
-                  data={
-                    context.store.collection[0].realData != []
-                      ? context.store.collection[0].realData[
-                          context.store.collection[0].realData.length - 1
-                        ].data
-                      : null
-                  }
-                  device={device}
-                  unit={null}
-                />
-              ) : device === "sonar" ? (
-                <DataLabel
-                  data={
-                    context.store.collection[1].realData != []
-                      ? context.store.collection[1].realData[
-                          context.store.collection[1].realData.length - 1
-                        ].data
-                      : null
-                  }
-                  device={device}
-                  unit={
-                    context.store.collection[1].realData.length ? "%" : null
-                  }
-                />
-              ) : device === "thermostat" ? (
-                <DataLabel
-                  data={
-                    context.store.collection[2].realData != []
-                      ? context.store.collection[2].realData[
-                          context.store.collection[2].realData.length - 1
-                        ].data
-                      : null
-                  }
-                  device={device}
-                  unit={
-                    context.store.collection[2].realData.length ? "°C" : null
-                  }
-                />
-              ) : device === "extLight" ? (
-                <DataLabel
-                  data={
-                    context.store.collection[3].realData != []
-                      ? context.store.collection[3].realData[
-                          context.store.collection[3].realData.length - 1
-                        ].data
-                      : null
-                  }
-                  device={device}
-                  unit={null}
-                />
-              ) : device === "motion" ? (
-                <DataLabel
-                  data={
-                    context.store.collection[4].realData != []
-                      ? context.store.collection[4].realData[
-                          context.store.collection[4].realData.length - 1
-                        ].data
-                      : null
-                  }
-                  device={device}
-                  unit={null}
-                />
-              ) : null}
+            <Stack flexDirection={"column"}>
+              <Stack>
+                {device === "intLight" ? (
+                  <div className="form-check form-switch">
+                    <input
+                      className="form-check-input border"
+                      type="checkbox"
+                      checked={status}
+                      onChange={handleChange}
+                      name={`${device}Switch`}
+                      id={`${device}Switch`}
+                    />
+                    <label
+                      className="form-check-label"
+                      htmlFor={`${device}Switch`}
+                    ></label>
+                  </div>
+                ) : device === "sonar" ? (
+                  <DataLabel
+                    data={
+                      context.store.collection[1].realData != []
+                        ? context.store.collection[1].realData[
+                            context.store.collection[1].realData.length - 1
+                          ].data
+                        : null
+                    }
+                    device={device}
+                    unit={
+                      context.store.collection[1].realData.length ? "%" : null
+                    }
+                  />
+                ) : device === "thermostat" ? (
+                  <DataLabel
+                    data={
+                      context.store.collection[2].realData != []
+                        ? context.store.collection[2].realData[
+                            context.store.collection[2].realData.length - 1
+                          ].data
+                        : null
+                    }
+                    device={device}
+                    unit={
+                      context.store.collection[2].realData.length ? "°C" : null
+                    }
+                  />
+                ) : device === "extLight" ? (
+                  <div className="form-check form-switch">
+                    <input
+                      className="form-check-input border"
+                      type="checkbox"
+                      checked={status}
+                      onChange={handleChange}
+                      name={`${device}Switch`}
+                      id={`${device}Switch`}
+                    />
+                    <label
+                      className="form-check-label"
+                      htmlFor={`${device}Switch`}
+                    ></label>
+                  </div>
+                ) : device === "motion" ? (
+                  <div className="form-check form-switch">
+                    <input
+                      className="form-check-input border"
+                      type="checkbox"
+                      checked={status}
+                      onChange={handleChange}
+                      name={`${device}Switch`}
+                      id={`${device}Switch`}
+                    />
+                    <label
+                      className="form-check-label"
+                      htmlFor={`${device}Switch`}
+                    ></label>
+                  </div>
+                ) : null}
+              </Stack>
             </Stack>
           </Stack>
 
           <Typography
-            className={"card-title"}
+            className={
+              device === "motion" &&
+              context.store.collection[4].status === true &&
+              context.store.collection[4].realData[
+                context.store.collection[4].realData.length - 1
+              ].data === true
+                ? "red-alert card-title"
+                : "card-title"
+            }
             variant={"h6"}
             onClick={handleClick}
             component={"div"}
@@ -127,23 +156,6 @@ const Card = ({ id, device, name, status }) => {
           >
             {name}
           </Typography>
-
-          <div className="div">
-            <div className="form-check form-switch">
-              <input
-                className="form-check-input border"
-                type="checkbox"
-                checked={status}
-                onChange={handleChange}
-                name={`${device}Switch`}
-                id={`${device}Switch`}
-              />
-              <label
-                className="form-check-label"
-                htmlFor={`${device}Switch`}
-              ></label>
-            </div>
-          </div>
         </div>
         <div className="col"></div>
       </div>

@@ -45,11 +45,16 @@ const DataInsights = ({ realData, device }) => {
       date: new Date(eachObj.date).toLocaleTimeString("en-US"),
       duration:
         index != 0
-          ? (new Date(realData[index - 1].date).getTime() -
+          ? ((new Date(realData[index - 1].date).getTime() -
               new Date(realData[index].date).getTime()) /
-              1000 +
-            "s"
+              60000).toFixed(1) +
+            " min"
           : null,
+      // suponiendo que el bombillo es de 0.1kW o 100W
+      power: index != 0
+      ? ((new Date(realData[index - 1].date).getTime() -
+          new Date(realData[index].date).getTime()) * 100 /
+          3600000).toFixed(1) + " Wh" : null
     };
   });
 

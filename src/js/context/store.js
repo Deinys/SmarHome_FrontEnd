@@ -16,6 +16,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         chartDates: [],
         chartData: [],
         currentChartTab: "",
+        currentChartFilter: "",
       },
       collection: [
         {
@@ -46,7 +47,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           id: 1,
           device: "sonar",
           name: "Water level",
-          status: true,
           realData: [
             {
               date: "Sun, 29 May 2022 04:08:38 GMT",
@@ -69,7 +69,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           id: 2,
           device: "thermostat",
           name: "Temperature",
-          status: true,
           realData: [
             {
               date: "Sun, 29 May 2022 04:08:38 GMT",
@@ -107,7 +106,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         {
           id: 4,
           device: "motion",
-          name: "Motion",
+          name: "Motion alarm",
           status: true,
           realData: [
             {
@@ -131,6 +130,11 @@ const getState = ({ getStore, getActions, setStore }) => {
       ],
     },
     actions: {
+      init: () => {
+        let actions = getActions()
+
+        actions.setCurrentChartTab("intLight");
+      },
       getLastEntry: async () => {
         let store = getStore();
 
@@ -232,6 +236,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             chartData: dataArr,
             chartMin: Math.min(...dataArr) - 5,
             chartMax: Math.max(...dataArr) + 5,
+            currentChartFilter: "now"
           },
         });
       },
@@ -260,6 +265,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             chartMin: Math.min(...dailyData) - 5,
             chartMax: Math.max(...dailyData) + 5,
             genericDailyDates: dailyHours,
+            currentChartFilter: "today"
           },
         });
       },
@@ -289,6 +295,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             chartMin: Math.min(...weeklyData) - 5,
             chartMax: Math.max(...weeklyData) + 5,
             genericWeeklyDates: weeklyDates,
+            currentChartFilter: "last7days"
           },
         });
       },

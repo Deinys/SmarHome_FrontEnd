@@ -41,7 +41,6 @@ const BarChart = ({ realData, dailyData, weeklyData, device }) => {
   // horas que han pasado hoy. 4am retorna [1, 2, 3, 4]
   // se tiene que actualizar cada vez que le llega info (cada hora)
 
-
   const handleLiveClick = () => {
     context.actions.setLiveChart(realData);
   };
@@ -106,9 +105,42 @@ const BarChart = ({ realData, dailyData, weeklyData, device }) => {
           </Typography>
         </Stack>
         <Stack flexDirection={"row"}>
-          <button onClick={handleLiveClick}>Now</button>
-          <button onClick={handleDailyClick}>Today</button>
-          <button onClick={handleWeeklyClick}>Last 7 days</button>
+          <button
+            className={
+              context.store.charts.currentChartFilter === "now"
+                ? "chart-button selected-filter"
+                : "chart-button"
+            }
+            onClick={handleLiveClick}
+          >
+            <Typography variant="body2" sx={{ fontWeight: 400 }}>
+              Now
+            </Typography>
+          </button>
+          <button
+            className={
+              context.store.charts.currentChartFilter === "today"
+                ? "chart-button selected-filter"
+                : "chart-button"
+            }
+            onClick={handleDailyClick}
+          >
+            <Typography variant="body2" sx={{ fontWeight: 400 }}>
+              Today
+            </Typography>
+          </button>
+          <button
+            className={
+              context.store.charts.currentChartFilter === "last7days"
+                ? "chart-button selected-filter"
+                : "chart-button"
+            }
+            onClick={handleWeeklyClick}
+          >
+            <Typography variant="body2" sx={{ fontWeight: 400 }}>
+              Last 7 days
+            </Typography>
+          </button>
         </Stack>
       </Stack>
       <Stack flexDirection={"row"}>
