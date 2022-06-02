@@ -1,42 +1,43 @@
 import React from "react";
 import Logo from "../../img/Logo2.png";
+import { Link } from "react-router-dom";
 
 const Login = () => {
+
   return (
     <div>
       <div className="container">
-        <div class="container d-flex justify-content-center">
-          <div class="col-4">
-            <div class="shadow-lg p-4">
-              <form class="row g-4 needs-validation" novalidate>
+        <div className="container d-flex justify-content-center">
+          <div className="col-4">
+            <div className="shadow-lg p-4">
+              <form className="row g-4 needs-validation" noValidate>
                 <div className="imagen-login col-md-12 rounded-3">
                   <img src={Logo} height="70" />
                 </div>
-                <div class="col-12">
-                  <label for="nombre" class="form-label"></label>
+                <div className="col-12">
+                  <label for="nombre" className="form-label"></label>
                   <input
-                    class="form-control"
-                    placeholder="username or email"
-                    required
+                    className="form-control" maxLength="220" placeholder="Name" required
                   />
                 </div>
-                <div class="col-12">
-                  <label for="nombre" class="form-label"></label>
-                  <input class="form-control" placeholder="password" required />
+                <div className="col-12">
+                  <label for="nombre" className="form-label"></label>
+                  <input className="form-control" type="password" maxLength="75" placeholder="Password" required />
                 </div>
-                <div class="d-grid col-12 ">
-                  <button class="button btn btn-primary">Log in</button>
+                <div className="d-grid col-12 ">
+                  <button className="button btn btn-primary" type="submit">Log in</button>
                 </div>
               </form>
             </div>
           </div>
         </div>
-        <div class="container d-flex justify-content-center p-4">
-          <div class="col-4">
-            <div class="shadow-lg p-4">
-              <form class="row g-4 needs-validation" novalidate>
-                <div class="d-grid col-12 ">
-                  {/* <p className="fw-bold">Don't have an account ?  <a href="#" class="stretched-link">Sing Up</a></p> */}
+        <div className="container d-flex justify-content-center p-4">
+          <div className="col-4">
+            <div className="shadow-lg p-4">
+              <form className="row g-4 needs-validation" noValidate>
+                <div className="d-grid col-12 ">
+                  <p className="fw-bold">Don't have an account ?
+                    <Link to="/signup"> Sign Up</Link></p>
                 </div>
               </form>
             </div>
