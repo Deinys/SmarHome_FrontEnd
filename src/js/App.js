@@ -6,7 +6,7 @@ import Layout from "./layout";
 import Home from "./views/Home.jsx";
 import Login from "./views/Login.jsx";
 import Signup from "./views/Signup.jsx";
-import Landing from "./components/Landing.jsx";
+import Landing from "./views/Landing.jsx";
 
 import {
   ThemeProvider,
