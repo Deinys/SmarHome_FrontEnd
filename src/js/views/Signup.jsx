@@ -26,7 +26,7 @@ const Signup = () => {
 
   }
 
-  const handleClick = (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     console.log(datos.name + ' ' + datos.password)
     context.actions.signup(datos);
@@ -37,7 +37,7 @@ const Signup = () => {
         <div className="container d-flex justify-content-center">
           <div className="col-4">
             <div className="shadow-lg p-4">
-              <form className="row g-4 needs-validation"  onSubmit={enviarDatos} noValidate>
+              <form className="row g-4 needs-validation" onSubmit={handleSubmit} noValidate>
                 <div className="imagen-login col-md-12 rounded-3">
                   <img src={Logo} height="70" />
                 </div>
@@ -54,7 +54,7 @@ const Signup = () => {
                   <input className="form-control" type="password" name="password" onChange={handleInputChange} maxLength="75" placeholder="password" required />
                 </div>
                 <div className="d-grid col-12 ">
-                  <button className="button btn btn-primary" onClick={handleClick} type="submit">Sign Up</button>
+                  <button className="button btn btn-primary" type="submit">Sign Up</button>
                 </div>
               </form>
             </div>
