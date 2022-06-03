@@ -60,8 +60,8 @@ const BarChart = ({ realData, dailyData, weeklyData, device }) => {
         label: device,
         data: context.store.charts.chartData,
         tension: 0.2,
-        borderColor: "rgb(75, 192, 192)",
-        backgroundColor: "rgb(75, 192, 192)",
+        borderColor: "rgb(55, 55, 192)",
+        backgroundColor: "rgb(55, 55, 192)",
       },
     ],
   };

@@ -1,11 +1,11 @@
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
-      BASE_URL: "http://127.0.0.1:8000",
+      BASE_URL:
+        "https://8000-deinys-smarthomebackend-k4m8zj621op.ws-us46.gitpod.io",
       user: {
-        name: "Raul",
-        token:
-          "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY1NDIyMTcyOCwianRpIjoiZDlkZjkzOWYtY2JjZC00ZmZiLTgwNWMtYzc2OTI2Yjg3YWRhIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNjU0MjIxNzI4fQ.-jGof5IaVHSlndRB7nr07Rtye7SFDiy7vOHo2CEAQ5I",
+        name: JSON.parse(localStorage.getItem("userName")) || "",
+        token: JSON.parse(localStorage.getItem("userToken")) || "",
       },
       charts: {
         chartMin: 0,
@@ -81,6 +81,51 @@ const getState = ({ getStore, getActions, setStore }) => {
 
         actions.setCurrentChartTab("intLight");
       },
+      login: async (email, password) => {
+        let store = getStore();
+
+        let response = await fetch(`${store.BASE_URL}/login`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: email,
+            password: password,
+          }),
+        });
+        if (response.ok) {
+          let data = await response.json();
+          setStore({
+            ...store,
+            user: {
+              ...store.user,
+              name: data.name,
+              token: data.token,
+            },
+          });
+          localStorage.setItem("userName", JSON.stringify(data.name));
+          localStorage.setItem("userToken", JSON.stringify(data.token));
+        }
+      },
+      signup: async (name, email, password, serialnumber) => {
+        let store = getStore();
+
+        console.log(name, email, password, serialnumber);
+
+        let response = await fetch(`${store.BASE_URL}/signup`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: name,
+            email: email,
+            password: password,
+            controller_sn: serialnumber,
+          }),
+        });
+      },
       getLastEntries: async () => {
         let store = getStore();
 
@@ -92,47 +137,45 @@ const getState = ({ getStore, getActions, setStore }) => {
         });
         if (response.ok) {
           let data = await response.json();
-          console.log(data);
 
           setStore({
             ...store,
             collection: store.collection.map((eachObj, index) => {
               if (index === 1) {
-                if (eachObj.realData.length === 10) {
-                  eachObj.realData.shift();
+                if (eachObj.realData.length === 15) {
+                  eachObj.realData.pop();
                 }
                 return {
                   ...eachObj,
                   realData: [
-                    ...eachObj.realData,
                     {
                       date: data.results.sonar.date_created,
                       data: data.results.sonar.device_data,
                     },
+                    ...eachObj.realData,
                   ],
                 };
               } else if (index === 2) {
-                if (eachObj.realData.length === 10) {
-                  eachObj.realData.shift();
+                if (eachObj.realData.length === 15) {
+                  eachObj.realData.pop();
                 }
                 return {
                   ...eachObj,
                   realData: [
-                    ...eachObj.realData,
                     {
                       date: data.results.thermostat.date_created,
                       data: data.results.thermostat.device_data,
                     },
+                    ...eachObj.realData,
                   ],
                 };
               } else if (index === 4) {
-                if (eachObj.realData.length === 10) {
-                  eachObj.realData.shift();
+                if (eachObj.realData.length === 15) {
+                  eachObj.realData.pop();
                 }
                 return {
                   ...eachObj,
                   realData: [
-                    ...eachObj.realData,
                     {
                       date: data.results.motion.date_created,
                       data:
@@ -140,6 +183,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                           ? true
                           : false,
                     },
+                    ...eachObj.realData,
                   ],
                 };
               } else {
@@ -280,8 +324,8 @@ const getState = ({ getStore, getActions, setStore }) => {
             ...store.charts,
             chartDates: dateArr,
             chartData: dataArr,
-            chartMin: Math.min(...dataArr) - 5,
-            chartMax: Math.max(...dataArr) + 5,
+            chartMin: Math.min(...dataArr) - 2,
+            chartMax: Math.max(...dataArr) + 2,
             currentChartFilter: "now",
           },
         });
@@ -303,8 +347,8 @@ const getState = ({ getStore, getActions, setStore }) => {
             chartUnit: "minute",
             chartDates: dateArr,
             chartData: dataArr,
-            chartMin: Math.min(...dataArr) - 5,
-            chartMax: Math.max(...dataArr) + 5,
+            chartMin: Math.min(...dataArr) - 2,
+            chartMax: Math.max(...dataArr) + 2,
             currentChartFilter: "now",
           },
         });
@@ -331,8 +375,8 @@ const getState = ({ getStore, getActions, setStore }) => {
             chartUnit: "hour",
             chartDates: dailyHours,
             chartData: dailyData,
-            chartMin: Math.min(...dailyData) - 5,
-            chartMax: Math.max(...dailyData) + 5,
+            chartMin: Math.min(...dailyData) - 2,
+            chartMax: Math.max(...dailyData) + 2,
             genericDailyDates: dailyHours,
             currentChartFilter: "today",
           },
@@ -361,8 +405,8 @@ const getState = ({ getStore, getActions, setStore }) => {
             chartUnit: "day",
             chartDates: weeklyDates,
             chartData: weeklyData,
-            chartMin: Math.min(...weeklyData) - 5,
-            chartMax: Math.max(...weeklyData) + 5,
+            chartMin: Math.min(...weeklyData) - 2,
+            chartMax: Math.max(...weeklyData) + 2,
             genericWeeklyDates: weeklyDates,
             currentChartFilter: "last7days",
           },

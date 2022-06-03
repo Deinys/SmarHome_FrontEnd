@@ -47,10 +47,12 @@ const ColumnChart = ({ realData, device }) => {
       {
         label: device,
         data: context.store.charts.chartData,
-        tension: 0.2,
-        borderColor: "rgb(75, 192, 192)",
-        pointRadius: 6,
-        pointBackgroundColor: "rgb(75, 192, 192)",
+        tension: 0,
+        borderColor: "rgb(55, 55, 192)",
+        backgroundColor: "rgb(55, 55, 192)",
+        pointRadius: 3,
+        pointBackgroundColor: "rgb(55, 55, 192)",
+        borderWidth: 3,
       },
     ],
   };

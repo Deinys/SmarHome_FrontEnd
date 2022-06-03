@@ -83,9 +83,7 @@ const Card = ({ id, device, name, status }) => {
                   <DataLabel
                     data={
                       context.store.collection[1].realData != []
-                        ? context.store.collection[1].realData[
-                            context.store.collection[1].realData.length - 1
-                          ].data
+                        ? context.store.collection[1].realData[0].data
                         : null
                     }
                     device={device}
@@ -97,9 +95,7 @@ const Card = ({ id, device, name, status }) => {
                   <DataLabel
                     data={
                       context.store.collection[2].realData != []
-                        ? context.store.collection[2].realData[
-                            context.store.collection[2].realData.length - 1
-                          ].data
+                        ? context.store.collection[2].realData[0].data
                         : null
                     }
                     device={device}
