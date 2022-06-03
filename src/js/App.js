@@ -6,6 +6,7 @@ import Layout from "./layout";
 import Home from "./views/Home.jsx";
 import Login from "./views/Login.jsx";
 import Signup from "./views/Signup.jsx";
+import Landing from "./views/Landing.jsx";
 
 import {
   ThemeProvider,
@@ -34,9 +35,10 @@ const App = () => {
         <BrowserRouter basename={basename}>
           <Layout>
             <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/Login" element={<Login />} />
-              <Route path="/Signup" element={<Signup />} />
+              <Route path="/" element={<Landing />} />
+              <Route path="/dashboard" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
               <Route path="*" element={<h1>404 Not found</h1>} />
             </Routes>
           </Layout>

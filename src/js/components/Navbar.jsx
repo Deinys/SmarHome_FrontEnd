@@ -25,8 +25,8 @@ export default function AccountMenu() {
   let context = React.useContext(Context);
   return (
     <div>
-      <nav className="color-navbar navbar navbar-expand-lg navbar-light bg-light">
-        <Container maxWidth={"xl"}>
+      <nav className="navbar navbar-expand-lg">
+        <Container maxWidth={"lg"}>
           <Stack
             flexDirection={"row"}
             justifyContent={"space-between"}
