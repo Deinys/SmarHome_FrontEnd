@@ -31,7 +31,7 @@ const DataHistory = ({ realData, dataType, unit }) => {
     newRows = realData.map((eachObj, index) => {
       return {
         id: index + 1,
-        data: eachObj.data === false ? "No" : "Yes",
+        data: eachObj.data === "False" ? "No" : "Yes",
         date: new Date(eachObj.date).toLocaleTimeString('en-US')
       }
     })

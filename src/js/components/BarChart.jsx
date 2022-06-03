@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { Stack, Typography } from "@mui/material";
 
@@ -60,8 +60,8 @@ const BarChart = ({ realData, dailyData, weeklyData, device }) => {
         label: device,
         data: context.store.charts.chartData,
         tension: 0.2,
-        borderColor: "rgb(75, 192, 192)",
-        backgroundColor: "rgb(75, 192, 192)",
+        borderColor: "rgb(55, 55, 192)",
+        backgroundColor: "rgb(55, 55, 192)",
       },
     ],
   };
@@ -90,6 +90,16 @@ const BarChart = ({ realData, dailyData, weeklyData, device }) => {
       },
     },
   };
+
+  useEffect(() => {
+    if (context.store.charts.currentChartFilter === "now") {
+      context.actions.setLiveChart(realData);
+    } else if (context.store.charts.currentChartFilter === "today") {
+      context.actions.setDailyChart(dailyData);
+    } else if (context.store.charts.currentChartFilter === "last7days") {
+      context.actions.setWeeklyChart(weeklyData);
+    }
+  }, [realData]);
 
   return (
     <>

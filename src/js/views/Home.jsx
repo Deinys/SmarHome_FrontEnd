@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { Stack, Typography, Container } from "@mui/material";
 import Card from "../components/Card.jsx";
@@ -15,12 +15,16 @@ const Home = () => {
   let context = React.useContext(Context);
   let currentTab = context.store.charts.currentChartTab;
 
+  useEffect(() => {
+    setInterval(() => context.actions.getLastEntries(), 30000)
+  }, [])
+
   return (
-    <div className="dashboard">
-      <Container maxWidth={"lg"}>
+    <div className="dashboard custom-padding-bottom">
+      <Container maxWidth={"xl"}>
         <Stack
           flexDirection={"row"}
-          marginTop={"60px"}
+          paddingTop={"60px"}
           marginBottom={"20px"}
           justifyContent={"space-between"}
           alignItems={"center"}

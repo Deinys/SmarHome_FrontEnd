@@ -1,10 +1,11 @@
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
-      BASE_URL: "127.0.0.1:8000",
+      BASE_URL:
+        "https://8000-deinys-smarthomebackend-k4m8zj621op.ws-us46.gitpod.io",
       user: {
-        name: "Raul",
-        token: "",
+        name: JSON.parse(localStorage.getItem("userName")) || "",
+        token: JSON.parse(localStorage.getItem("userToken")) || "",
       },
       charts: {
         chartMin: 0,
@@ -24,38 +25,14 @@ const getState = ({ getStore, getActions, setStore }) => {
           device: "intLight",
           name: "Interior lights",
           status: true,
-          realData: [
-            {
-              date: "Sat, 29 May 2022 05:07:12 GMT",
-              data: true,
-            },
-            {
-              date: "Sat, 29 May 2022 05:07:20 GMT",
-              data: false,
-            },
-            {
-              date: "Sat, 29 May 2022 05:08:22 GMT",
-              data: true,
-            },
-            {
-              date: "Sat, 29 May 2022 05:21:02 GMT",
-              data: false,
-            },
-          ].reverse(),
+          realData: JSON.parse(localStorage.getItem("intLightData")) || [],
         },
         {
           id: 1,
           device: "sonar",
           name: "Water level",
-          realData: [
-            {
-              date: "Sun, 29 May 2022 04:08:38 GMT",
-              data: 59,
-            },
-            {
-              date: "Sun, 29 May 2022 04:07:38 GMT",
-              data: 60,
-            },
+          realData: JSON.parse(localStorage.getItem("sonarData")) || [
+            { date: "Fri, 03 Jun 2022 00:37:24 GMT", data: 95 },
           ],
           data: {
             weekly: [60, 54, 50, 88, 82, 75, 69],
@@ -69,15 +46,8 @@ const getState = ({ getStore, getActions, setStore }) => {
           id: 2,
           device: "thermostat",
           name: "Temperature",
-          realData: [
-            {
-              date: "Sun, 29 May 2022 04:08:38 GMT",
-              data: 22,
-            },
-            {
-              date: "Sun, 29 May 2022 04:07:38 GMT",
-              data: 23,
-            },
+          realData: JSON.parse(localStorage.getItem("thermostatData")) || [
+            { date: "Fri, 03 Jun 2022 00:37:24 GMT", data: 23 },
           ],
           data: {
             weekly: [22, 24, 22, 21, 24, 23, 21],
@@ -92,95 +62,208 @@ const getState = ({ getStore, getActions, setStore }) => {
           device: "extLight",
           name: "Exterior lights",
           status: true,
-          realData: [
-            {
-              date: "Sat, 27 May 2022 18:47:38 GMT",
-              data: false,
-            },
-            {
-              date: "Sat, 27 May 2022 18:47:38 GMT",
-              data: false,
-            },
-          ],
+          realData: JSON.parse(localStorage.getItem("extLightData")) || [],
         },
         {
           id: 4,
           device: "motion",
           name: "Motion alarm",
           status: true,
-          realData: [
-            {
-              date: "Sat, 29 May 2022 17:07:38 GMT",
-              data: false,
-            },
-            {
-              date: "Sat, 29 May 2022 17:09:38 GMT",
-              data: true,
-            },
-            {
-              date: "Sat, 29 May 2022 17:11:38 GMT",
-              data: false,
-            },
-            {
-              date: "Sat, 29 May 2022 17:14:38 GMT",
-              data: true,
-            },
+          realData: JSON.parse(localStorage.getItem("motionData")) || [
+            { date: "Fri, 03 Jun 2022 00:37:24 GMT", data: "False" },
           ],
         },
       ],
     },
     actions: {
       init: () => {
-        let actions = getActions()
+        let actions = getActions();
 
         actions.setCurrentChartTab("intLight");
       },
-      getLastEntry: async () => {
+      login: async (email, password) => {
         let store = getStore();
 
-        let response = await fetch(`${BASE_URL}/entries`, {
+        let response = await fetch(`${store.BASE_URL}/login`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: email,
+            password: password,
+          }),
+        });
+        if (response.ok) {
+          let data = await response.json();
+          setStore({
+            ...store,
+            user: {
+              ...store.user,
+              name: data.name,
+              token: data.token,
+            },
+          });
+          localStorage.setItem("userName", JSON.stringify(data.name));
+          localStorage.setItem("userToken", JSON.stringify(data.token));
+        }
+      },
+      signup: async (name, email, password, serialnumber) => {
+        let store = getStore();
+
+        console.log(name, email, password, serialnumber);
+
+        let response = await fetch(`${store.BASE_URL}/signup`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: name,
+            email: email,
+            password: password,
+            controller_sn: serialnumber,
+          }),
+        });
+      },
+      getLastEntries: async () => {
+        let store = getStore();
+
+        let response = await fetch(`${store.BASE_URL}/last-entries`, {
+          method: "GET",
           headers: {
             Authorization: `Bearer ${store.user.token}`,
           },
         });
         if (response.ok) {
           let data = await response.json();
-          let currentDevice = store.collection.find((eachObj) => {
-            return eachObj.device === data.results.device_type;
-          });
-
-          let deviceIndex =
-            store.collection[store.collection.findIndex(currentDevice)];
-          let newData = 0;
-          let newArr = [];
-
-          if (typeOf(store.collection[deviceIndex].data) === "array") {
-            newArr = [
-              ...store.collection[deviceIndex].data.daily,
-              store.collection[deviceIndex].data.push(data.results.device_data),
-            ];
-          } else {
-            newArr = [
-              ...store.collection[deviceIndex].data.daily,
-              store.collection[deviceIndex].data.daily.push(
-                data.results.device_data
-              ),
-            ];
-          }
 
           setStore({
             ...store,
-            collection: newArr,
+            collection: store.collection.map((eachObj, index) => {
+              if (index === 1) {
+                if (eachObj.realData.length === 15) {
+                  eachObj.realData.pop();
+                }
+                return {
+                  ...eachObj,
+                  realData: [
+                    {
+                      date: data.results.sonar.date_created,
+                      data: data.results.sonar.device_data,
+                    },
+                    ...eachObj.realData,
+                  ],
+                };
+              } else if (index === 2) {
+                if (eachObj.realData.length === 15) {
+                  eachObj.realData.pop();
+                }
+                return {
+                  ...eachObj,
+                  realData: [
+                    {
+                      date: data.results.thermostat.date_created,
+                      data: data.results.thermostat.device_data,
+                    },
+                    ...eachObj.realData,
+                  ],
+                };
+              } else if (index === 4) {
+                if (eachObj.realData.length === 15) {
+                  eachObj.realData.pop();
+                }
+                return {
+                  ...eachObj,
+                  realData: [
+                    {
+                      date: data.results.motion.date_created,
+                      data:
+                        data.results.motion.device_data === "True"
+                          ? true
+                          : false,
+                    },
+                    ...eachObj.realData,
+                  ],
+                };
+              } else {
+                return eachObj;
+              }
+            }),
           });
+          localStorage.setItem(
+            "sonarData",
+            JSON.stringify(store.collection[1].realData)
+          );
+          localStorage.setItem(
+            "thermostatData",
+            JSON.stringify(store.collection[2].realData)
+          );
+          localStorage.setItem(
+            "motionData",
+            JSON.stringify(store.collection[4].realData)
+          );
+          // localStorage.setItem(
+          //   "sonarData",
+          //   JSON.stringify(newArr[1].realData)
+          // );
+          // localStorage.setItem(
+          //   "thermostatData",
+          //   JSON.stringify(newArr[2].realData)
+          // );
+          // localStorage.setItem(
+          //   "motionData",
+          //   JSON.stringify(newArr[4].realData)
+          // );
+          // let currentDevice = store.collection.find((eachObj) => {
+          //   return eachObj.device === data.results.device_type;
+          // });
+
+          // let deviceIndex =
+          //   store.collection[store.collection.findIndex(currentDevice)];
+          // let newData = 0;
+
+          // if (typeOf(store.collection[deviceIndex].data) === "array") {
+          //   newArr = [
+          //     ...store.collection[deviceIndex].data.daily,
+          //     store.collection[deviceIndex].data.push(data.results.device_data),
+          //   ];
+          // } else {
+          //   newArr = [
+          //     ...store.collection[deviceIndex].data.daily,
+          //     store.collection[deviceIndex].data.daily.push(
+          //       data.results.device_data
+          //     ),
+          //   ];
+          // }
         }
       },
-
-      setSensorStatus: (id) => {
+      setSensorStatus: (id, bool, device) => {
         let store = getStore();
 
         let newCollection = store.collection.map((eachObj) => {
           if (eachObj.id === id) {
-            return { ...eachObj, status: !eachObj.status };
+            if (device === "motion") {
+              return {
+                ...eachObj,
+                status: !eachObj.status,
+              };
+            } else {
+              if (eachObj.realData.length === 10) {
+                eachObj.realData.pop();
+              }
+              return {
+                ...eachObj,
+                status: !eachObj.status,
+                realData: [
+                  {
+                    date: new Date(),
+                    data: bool,
+                  },
+                  ...eachObj.realData,
+                ],
+              };
+            }
           }
           return eachObj;
         });
@@ -188,6 +271,14 @@ const getState = ({ getStore, getActions, setStore }) => {
           ...store,
           collection: newCollection,
         });
+        localStorage.setItem(
+          "intLightData",
+          JSON.stringify(store.collection[0].realData)
+        );
+        localStorage.setItem(
+          "extLightData",
+          JSON.stringify(store.collection[3].realData)
+        );
       },
       setCurrentChartTab: (device) => {
         let store = getStore();
@@ -217,6 +308,28 @@ const getState = ({ getStore, getActions, setStore }) => {
           },
         });
       },
+      updateMotionChart: (realData) => {
+        let store = getStore();
+
+        let dateArr = realData.map((eachObj) => {
+          return new Date(eachObj.date);
+        });
+        let dataArr = realData.map((eachObj) => {
+          return eachObj.data;
+        });
+
+        setStore({
+          ...store,
+          charts: {
+            ...store.charts,
+            chartDates: dateArr,
+            chartData: dataArr,
+            chartMin: Math.min(...dataArr) - 2,
+            chartMax: Math.max(...dataArr) + 2,
+            currentChartFilter: "now",
+          },
+        });
+      },
       setLiveChart: (realData) => {
         let store = getStore();
 
@@ -234,9 +347,9 @@ const getState = ({ getStore, getActions, setStore }) => {
             chartUnit: "minute",
             chartDates: dateArr,
             chartData: dataArr,
-            chartMin: Math.min(...dataArr) - 5,
-            chartMax: Math.max(...dataArr) + 5,
-            currentChartFilter: "now"
+            chartMin: Math.min(...dataArr) - 2,
+            chartMax: Math.max(...dataArr) + 2,
+            currentChartFilter: "now",
           },
         });
       },
@@ -262,10 +375,10 @@ const getState = ({ getStore, getActions, setStore }) => {
             chartUnit: "hour",
             chartDates: dailyHours,
             chartData: dailyData,
-            chartMin: Math.min(...dailyData) - 5,
-            chartMax: Math.max(...dailyData) + 5,
+            chartMin: Math.min(...dailyData) - 2,
+            chartMax: Math.max(...dailyData) + 2,
             genericDailyDates: dailyHours,
-            currentChartFilter: "today"
+            currentChartFilter: "today",
           },
         });
       },
@@ -292,10 +405,10 @@ const getState = ({ getStore, getActions, setStore }) => {
             chartUnit: "day",
             chartDates: weeklyDates,
             chartData: weeklyData,
-            chartMin: Math.min(...weeklyData) - 5,
-            chartMax: Math.max(...weeklyData) + 5,
+            chartMin: Math.min(...weeklyData) - 2,
+            chartMax: Math.max(...weeklyData) + 2,
             genericWeeklyDates: weeklyDates,
-            currentChartFilter: "last7days"
+            currentChartFilter: "last7days",
           },
         });
       },

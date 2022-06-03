@@ -17,8 +17,11 @@ const Card = ({ id, device, name, status }) => {
     context.actions.setCurrentChartTab(device);
   };
 
-  const handleChange = () => {
-    context.actions.setSensorStatus(id);
+  const handleChange = (e) => {
+    setTimeout(
+      () => context.actions.setSensorStatus(id, e.target.checked, device),
+      500
+    );
   };
 
   return (
@@ -80,9 +83,7 @@ const Card = ({ id, device, name, status }) => {
                   <DataLabel
                     data={
                       context.store.collection[1].realData != []
-                        ? context.store.collection[1].realData[
-                            context.store.collection[1].realData.length - 1
-                          ].data
+                        ? context.store.collection[1].realData[0].data
                         : null
                     }
                     device={device}
@@ -94,9 +95,7 @@ const Card = ({ id, device, name, status }) => {
                   <DataLabel
                     data={
                       context.store.collection[2].realData != []
-                        ? context.store.collection[2].realData[
-                            context.store.collection[2].realData.length - 1
-                          ].data
+                        ? context.store.collection[2].realData[0].data
                         : null
                     }
                     device={device}

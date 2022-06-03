@@ -7,6 +7,7 @@ import Home from "./views/Home.jsx";
 import Login from "./views/Login.jsx";
 import Signup from "./views/Signup.jsx";
 import Landing from "./views/Landing.jsx";
+import ProtectedRoutes from "./views/ProtectedRoutes.jsx";
 
 import {
   ThemeProvider,
@@ -36,7 +37,9 @@ const App = () => {
           <Layout>
             <Routes>
               <Route path="/" element={<Landing />} />
-              <Route path="/dashboard" element={<Home />} />
+              <Route element={<ProtectedRoutes />}>
+                <Route path="/dashboard" element={<Home />} />
+              </Route>
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="*" element={<h1>404 Not found</h1>} />

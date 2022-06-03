@@ -116,3 +116,11 @@ a:hover {
   background-color: rgba(0, 0, 0, 0.848);
   color: white;
 }
+
+.custom-margin {
+  margin-top: 70px!important;
+}
+
+.custom-padding-bottom {
+  padding-bottom: 90px;
+}

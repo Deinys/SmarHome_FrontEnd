@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { Stack, Typography } from "@mui/material";
 
@@ -41,21 +41,22 @@ const ColumnChart = ({ realData, device }) => {
   // horas que han pasado hoy. 4am retorna [1, 2, 3, 4]
   // se tiene que actualizar cada vez que le llega info (cada hora)
 
-  const data = {
+  let data = {
     labels: context.store.charts.chartDates,
     datasets: [
       {
         label: device,
         data: context.store.charts.chartData,
-        tension: 0.2,
-        borderColor: "rgb(75, 192, 192)",
-        pointRadius: 6,
-        pointBackgroundColor: "rgb(75, 192, 192)",
+        tension: 0,
+        borderColor: "rgb(55, 55, 192)",
+        backgroundColor: "rgb(55, 55, 192)",
+        pointRadius: 3,
+        pointBackgroundColor: "rgb(55, 55, 192)",
+        borderWidth: 3,
       },
     ],
   };
-
-  const options = {
+  let options = {
     responsive: true,
     animations: false,
     plugins: {
@@ -77,13 +78,13 @@ const ColumnChart = ({ realData, device }) => {
     },
   };
 
+  useEffect(() => {
+    context.actions.updateMotionChart(realData);
+  }, [realData]);
+
   return (
     <>
-      <Stack
-        flexDirection={"row"}
-        alignItems={"center"}
-        marginBottom={"20px"}
-      >
+      <Stack flexDirection={"row"} alignItems={"center"} marginBottom={"20px"}>
         <Stack flexDirection={"row"}>
           <Typography variant={"h6"} sx={{ fontWeight: 500 }}>
             Live chart
