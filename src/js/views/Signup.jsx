@@ -9,7 +9,7 @@ const Signup = () => {
   let context = useContext(
     Context
   )
-  
+
   const [datos, setDatos] = useState({
     name: "",
     email: "",
@@ -26,14 +26,10 @@ const Signup = () => {
 
   }
 
-  const enviarDatos = (event) => {
-      event.preventDefault();
-      console.log(datos.name + ' ' + datos.password)
-  }
-
   const handleClick = (event) => {
     event.preventDefault();
     console.log(datos.name + ' ' + datos.password)
+    context.actions.signup(datos);
   }
 
   return (
