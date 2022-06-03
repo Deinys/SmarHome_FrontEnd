@@ -15,13 +15,13 @@ const Login = () => {
                   <img src={Logo} height="70" />
                 </div>
                 <div className="col-12">
-                  <label for="nombre" className="form-label"></label>
+                  <label htmlFor="nombre" className="form-label"></label>
                   <input
                     className="form-control" maxLength="220" placeholder="Name" required
                   />
                 </div>
                 <div className="col-12">
-                  <label for="nombre" className="form-label"></label>
+                  <label htmlFor="nombre" className="form-label"></label>
                   <input className="form-control" type="password" maxLength="75" placeholder="Password" required />
                 </div>
                 <div className="d-grid col-12 ">
