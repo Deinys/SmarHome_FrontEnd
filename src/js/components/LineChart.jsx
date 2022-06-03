@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { Stack, Typography } from "@mui/material";
 
@@ -89,6 +89,16 @@ const LineChart = ({ realData, dailyData, weeklyData, device }) => {
     },
   };
 
+  useEffect(() => {
+    if (context.store.charts.currentChartFilter === "now") {
+      context.actions.setLiveChart(realData);
+    } else if (context.store.charts.currentChartFilter === "today") {
+      context.actions.setDailyChart(dailyData);
+    } else if (context.store.charts.currentChartFilter === "last7days") {
+      context.actions.setWeeklyChart(weeklyData);
+    }
+  }, [realData]);
+
   return (
     <>
       <Stack
@@ -123,7 +133,9 @@ const LineChart = ({ realData, dailyData, weeklyData, device }) => {
             }
             onClick={handleDailyClick}
           >
-            <Typography variant="body2" sx={{ fontWeight: 400 }}>Today</Typography>
+            <Typography variant="body2" sx={{ fontWeight: 400 }}>
+              Today
+            </Typography>
           </button>
           <button
             className={
@@ -133,7 +145,9 @@ const LineChart = ({ realData, dailyData, weeklyData, device }) => {
             }
             onClick={handleWeeklyClick}
           >
-            <Typography variant="body2" sx={{ fontWeight: 400 }}>Last 7 days</Typography>
+            <Typography variant="body2" sx={{ fontWeight: 400 }}>
+              Last 7 days
+            </Typography>
           </button>
         </Stack>
       </Stack>

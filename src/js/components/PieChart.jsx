@@ -47,11 +47,11 @@ const PieChart = ({ realData, device }) => {
     .filter((eachObj) => eachObj.status === "ON")
     .map((eachObj) => eachObj.duration);
 
-  let totalTimeOn = Math.round(timeOn.reduce((a, b) => a + b, 0) / 60);
-  let totalTimeOff = Math.round(timeOff.reduce((a, b) => a + b, 0) / 60);
+  let totalTimeOn = Math.round(timeOn.reduce((a, b) => a + b, 0));
+  let totalTimeOff = Math.round(timeOff.reduce((a, b) => a + b, 0));
 
   const data = {
-    labels: ["Time ON", "Time OFF"],
+    labels: ["Time ON (seconds)", "Time OFF (seconds)"],
     datasets: [
       {
         label: device,

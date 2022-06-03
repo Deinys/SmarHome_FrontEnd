@@ -9,7 +9,7 @@ import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import Logout from '@mui/icons-material/Logout';
 import { Link } from "react-router-dom";
-import { Stack } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import { Container } from "@mui/material";
 import { Context } from "../context/appContext";
 
@@ -38,6 +38,10 @@ export default function AccountMenu() {
               </Link>
             </Stack>
             <React.Fragment>
+              <Link to="/dashboard">
+                <Typography variant={"h6"}>Dashboard</Typography>
+              </Link>
+              <Stack onClick={context.actions.getLastEntries}>Click me</Stack>
               <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
                 <Tooltip title="Account settings">
                   <IconButton

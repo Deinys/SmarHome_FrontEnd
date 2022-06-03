@@ -17,8 +17,11 @@ const Card = ({ id, device, name, status }) => {
     context.actions.setCurrentChartTab(device);
   };
 
-  const handleChange = () => {
-    context.actions.setSensorStatus(id);
+  const handleChange = (e) => {
+    setTimeout(
+      () => context.actions.setSensorStatus(id, e.target.checked, device),
+      500
+    );
   };
 
   return (
